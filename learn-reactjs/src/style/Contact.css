@@ -1,0 +1,163 @@
+.section-contact {
+    background-image: url("../images/loginblur.png");
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.container-contact {
+    display: grid;
+    grid-template-columns: 500px auto; 
+    min-height: 100vh;
+}
+
+.contactus {
+    background-image: linear-gradient(rgb(216, 216, 216), rgb(0, 0, 0));
+}
+
+.contactus h2{
+    padding: 2rem;
+    font-size: 35px;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 5px rgb(0, 0, 0);
+}
+
+.contactus-text{
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+}
+
+.address {
+    padding: 1rem;
+}
+
+.time {
+    padding: 1rem;
+}
+
+.contact-img {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-img img{
+    max-width: 500px;
+}
+
+.contactform{
+    background-color: #d3d3d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.insideform{
+    background-color: rgb(255, 255, 255);
+    padding: 3rem;
+    max-width: 900px;
+    width: 90%;
+    border-radius: 15px;
+}
+
+.confirm-btn{
+    background: red;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 2px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.textform .message {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contactus {
+    color: #fff;
+    text-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.info-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+    
+}
+
+.textform input, .message input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0.3rem;
+}
+
+.message input {
+    height: 250px; 
+    resize: none; 
+}
+
+.textform p {
+    margin: 0.3rem;
+}
+
+.message p {
+    margin: 0.3rem;
+}
+
+.buttonform p{
+    color: red;
+    font-size: small;
+}
+
+@media screen and (max-width: 768px) {
+    .container-contact {
+      grid-template-columns: 1fr; /* ซ้อนเป็นแนวตั้ง */
+    }
+  
+    .contact-img img {
+      max-width: 100%;
+      height: auto;
+    }
+  
+    .insideform {
+      padding: 1rem;
+      width: 95%;
+    }
+  
+    .info-form {
+      grid-template-columns: 1fr; /* ซ้อนฟอร์มข้อความ */
+    }
+  
+    .confirm-btn {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 16px;
+    }
+  
+    .textform input,
+    .message input {
+      font-size: 14px;
+    }
+  
+    .contactus-text {
+      font-size: 28px;
+      padding: 1.5rem;
+    }
+  
+    .contactus p {
+      font-size: 14px;
+      padding: 0.5rem;
+    }
+  
+    .buttonform p {
+      font-size: 12px;
+    }
+  }
+  

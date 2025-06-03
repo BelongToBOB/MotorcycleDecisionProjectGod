@@ -1,0 +1,173 @@
+.section-criterion {
+    background-image: url("../images/greymotocbr1000blur.png");
+    background-size: cover;
+    min-height: 100vh;
+    overflow: auto;
+    
+}
+
+.content-box-criterion-out {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 3rem; 
+    padding-bottom: 3rem; 
+}
+
+
+.content-box-criterion {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); 
+    max-width: 1200;
+    width: 90%;
+}
+
+.container .content-box .choice-text {
+    padding: 1.5rem;
+}
+
+.choice-text {
+    text-align: center;
+    padding: 1rem;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.data-choice {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px;
+    width: 100%;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.check-btn {
+    background-color: #ffffff;
+    color: white;
+    border: none;
+    padding: 7px 7px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 5px;
+}
+
+.button-con {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+
+
+.price, .cc, .fuel, .brand, .fuel-size, .maintenance {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #d2d2d2;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%; 
+    max-width: 330px; 
+    padding: 1.5rem; 
+    min-height: 250px; 
+    box-shadow: 2px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.price h3, .cc h3, .fuel h3, .brand h3, .maintenance h3, .fuel-size h3 {
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.next-btn-prioritize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    background: #DEDEDE;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.back-btn-prioritize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    background: #DEDEDE;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.next-btn-prioritize:hover {
+    transform: scale(0.95);
+    transition: 0.4s;
+    background-color: rgb(255, 0, 0);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    border: none;
+}
+
+.back-btn-prioritize:hover {
+    transform: scale(0.95);
+    transition: 0.4s;
+    background-color: #7a7a7a;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    border: none;
+}
+
+
+
+.next-btn a {
+    color: #fff;
+}
+
+
+.check-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #eee;
+    border: 2px solid #aaa;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .check-btn.active {
+    background: #ff4949;
+    border: 2px solid #e74c3c;
+    box-shadow: 0 0 2px #e74c3c;
+  }
+
+.brand-options{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10;
+}
+
+
+
+  

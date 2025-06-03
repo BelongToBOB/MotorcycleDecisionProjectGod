@@ -1,0 +1,126 @@
+.BikeAll-con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+    width: 100%;
+  }
+  
+  .Bike-product {
+    width: 900px;
+    max-width: 98vw;
+    min-width: 240px;
+    height: auto;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    background: #fff;
+  }
+  
+  .Bike-productName {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  
+  .Bike-Name-pic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+    padding: 10px;
+  }
+  
+  .bike-img-bikeAll {
+    width: 140px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid #ddd;
+  }
+  
+  .bike-name {
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+  .Brand-bike-name {
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 1024px) {
+    .Bike-product {
+      width: 100%;
+      padding: 1.2rem;
+    }
+    .Bike-productName {
+      gap: 0.8rem;
+    }
+    .Bike-Name-pic {
+      width: 140px;
+      padding: 7px;
+    }
+    .bike-img-bikeAll {
+      width: 90px;
+      height: 65px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .BikeAll-con {
+      padding: 1rem;
+    }
+    .Bike-product {
+      width: 100%;
+      padding: 1rem;
+    }
+    .Bike-productName {
+      gap: 0.5rem;
+    }
+    .Bike-Name-pic {
+      width: 48vw;
+      max-width: 150px;
+      min-width: 110px;
+      padding: 7px;
+    }
+    .bike-img-bikeAll {
+      width: 80px;
+      height: 52px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .BikeAll-con {
+      padding: 0.2rem;
+      gap: 1rem;
+    }
+    .Bike-product {
+      padding: 0.5rem;
+      border-radius: 8px;
+    }
+    .Brand-bike-name h1 {
+      font-size: 1.2rem;
+    }
+    .Bike-productName {
+      gap: 0.3rem;
+      flex-direction: column;
+      align-items: center;
+    }
+    .Bike-Name-pic {
+      width: 95vw;
+      max-width: 300px;
+      min-width: 100px;
+      padding: 8px 0;
+      margin-bottom: 10px;
+    }
+    .bike-img-bikeAll {
+      width: 100px;
+      height: 60px;
+    }
+  }
+  
+

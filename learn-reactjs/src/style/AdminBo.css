@@ -1,0 +1,11 @@
+.admin-img {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 10rem;
+}
+
+.admin-img .admin-image{
+    max-width: 200px;
+    width: 100%;
+}

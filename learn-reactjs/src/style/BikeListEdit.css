@@ -1,0 +1,10 @@
+.my-form-bg {
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.edit-bike-column{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

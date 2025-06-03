@@ -1,0 +1,60 @@
+.section-user-page {
+    background-image: url("../images/suzukiblur.png");
+    background-size: cover;
+    min-height: 100vh;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.user-edit-box {
+    max-width: 1000px;
+    width: 100%;
+    padding: 2rem;
+    margin-top: 1rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.user-tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.user-tag h2 {
+    font-size: 30px;
+    font-weight: 300;
+    text-shadow: 0px 0px 1px rgb(0, 0, 0);
+}
+
+.search-info {
+    display: flex;
+    justify-content: baseline;
+    max-width: 400px;
+    width: 90%;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    margin-top: 1rem;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    color: rgb(0, 0, 0);
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }

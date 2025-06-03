@@ -1,0 +1,129 @@
+import React, { useState, useEffect } from 'react'
+import Navbar from '../components/Navbar'
+import Sidebar from '../components/Sidebar'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import ImageUploader from '../components/ImageUploader'
+
+export default function BikeListAdd() {
+  const [form, setForm] = useState({
+    moto_name: "",
+    moto_brand: "",
+    moto_weight: "",
+    moto_cc: "",
+    maintenance_cost: "",
+    consumption_rate: "",
+    moto_content: "",
+    moto_price: "",
+    moto_type_id: "",
+    picture: "",
+    fuel_size: ""
+  });
+  const [types, setTypes] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/mototype", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+    })
+    .then(res => setTypes(res.data))
+    .catch(() => toast.error("โหลดประเภทไม่สำเร็จ"));
+  }, []);
+
+  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleImageUpload = url => setForm(f => ({ ...f, picture: url }));
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (!form.moto_name || !form.moto_type_id) return toast.error("กรอกข้อมูลให้ครบ");
+    try {
+      await axios.post("http://localhost:5000/api/motorcycle", form, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+      });
+      toast.success("เพิ่มข้อมูลสำเร็จ");
+      navigate("/BikeList");
+    } catch (err) {
+      toast.error("เพิ่มข้อมูลไม่สำเร็จ");
+    }
+  };
+
+  return (
+    <>
+      <Navbar />
+      <Sidebar />
+      <section className='section-admin-page-edit'>
+        <div className='admin-edit-box-edit'>
+          <div className='admin-tag-edit'><h2>เพิ่มข้อมูลรถจักรยานยนต์</h2></div>
+          <form className='my-form-bg' onSubmit={handleSubmit}>
+            <div className='admin-info-box'>
+              <div className='admin-info-grid-bike-list-add'>
+                <div className='admin-img-upload'>
+                  <h3>รูปภาพ</h3>
+                  <ImageUploader value={form.picture} onUpload={handleImageUpload} />
+                </div>
+                <div className='bike-type'>
+                  <h3>ประเภท</h3>
+                  <select
+                    name="moto_type_id"
+                    className='bike-type-input'
+                    value={form.moto_type_id}
+                    onChange={handleChange}
+                  >
+                    <option value="">--เลือกประเภท--</option>
+                    {types.map(t => (
+                      <option key={t.id} value={t.id}>{t.moto_type_name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className='edit-bike-column'>
+                    <div className='bike-brand'>
+                    <h3>ยี่ห้อ</h3>
+                    <input name="moto_brand" className='bike-brand-input' value={form.moto_brand} onChange={handleChange} />
+                    </div>
+                    <div className='bike-names'>
+                    <h3>ชื่อรถจักรยานยนต์</h3>
+                    <input name="moto_name" className='bike-name-input' value={form.moto_name} onChange={handleChange} />
+                    </div>
+                    <div className='bike-manter'>
+                    <h3>ค่าบำรุงรักษา</h3>
+                    <input name="maintenance_cost" className='bike-manter-input' value={form.maintenance_cost} onChange={handleChange} />
+                    </div>
+                    <div className='bike-kml'>
+                    <h3>อัตราสิ้นเปลือง</h3>
+                    <input name="consumption_rate" className='bike-kml-input' value={form.consumption_rate} onChange={handleChange} />
+                    </div>
+                    <div className='bike-weight'>
+                    <h3>น้ำหนัก</h3>
+                    <input name="moto_weight" className='bike-weight-input' value={form.moto_weight} onChange={handleChange} />
+                    </div>
+                    <div className='bike-cc'>
+                    <h3>cc</h3>
+                    <input name="moto_cc" className='bike-cc-input' value={form.moto_cc} onChange={handleChange} />
+                    </div>
+                    <div className='bike-fuel-size'>
+                    <h3>ขนาดถังน้ำมัน (ลิตร)</h3>
+                    <input name="fuel_size" className='bike-fuel-size-input' value={form.fuel_size} onChange={handleChange}/>
+                    </div>
+                    <div className='bike-price'>
+                    <h3>ราคา</h3>
+                    <input name="moto_price" className='bike-price-input' value={form.moto_price} onChange={handleChange} />
+                    </div>
+                    <div className='bike-moreInfo'>
+                    <h3>รายละเอียด</h3>
+                    <textarea name="moto_content" className='bike-moreInfo-input' value={form.moto_content} onChange={handleChange} />
+                    </div>
+                </div>
+              </div>
+              <div className='btn-area'>
+                <button className='cancel-btn' type="button" onClick={() => navigate("/BikeList")}>ยกเลิก</button>
+                <button className='confirm-btn2' type="submit">ยืนยัน</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </>
+  );
+}
+

@@ -1,0 +1,27 @@
+.admin-message-section {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #ccc2;
+}
+.admin-msg-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.admin-msg-table th,
+.admin-msg-table td {
+  border: 1px solid #e0e0e0;
+  padding: 8px;
+  text-align: left;
+}
+.delete-btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.delete-btn:hover { background: #c0392b; }

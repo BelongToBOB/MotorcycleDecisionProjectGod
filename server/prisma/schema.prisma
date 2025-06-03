@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int                @id @default(autoincrement())
+  username   String             @unique
+  email      String             @unique
+  password   String?
+  firstName  String?
+  lastName   String?
+  picture    String?
+  role       String             @default("user")
+  enable     Boolean            @default(true)
+  address    String?
+  gender     String?
+  birthDate  DateTime?
+  occupation String?
+  phone      String?
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+  histories  RecommendHistory[]
+  message    Message[]
+}
+
+model MotoType {
+  id             Int          @id @default(autoincrement())
+  moto_type_name String       @db.VarChar(45)
+  picture        String?
+  motorcycles    Motorcycle[]
+}
+
+model Motorcycle {
+  id               Int      @id @default(autoincrement())
+  moto_name        String   @db.VarChar(45)
+  moto_brand       String   @db.VarChar(30)
+  picture          String?
+  moto_weight      Float    @db.Float
+  moto_cc          Int      @db.Int
+  maintenance_cost Int      @db.Int
+  consumption_rate Float    @db.Float
+  fuel_size        Float?
+  moto_price       Int      @db.Int
+  moto_content     String   @db.Text
+  moto_view        Int?
+  moto_type_id     Int
+  moto_type        MotoType @relation(fields: [moto_type_id], references: [id])
+}
+
+model RecommendHistory {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  selectedType Int?
+  priority     String
+  criteria     String
+  result       String
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  tel       String?
+  content   String 
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}

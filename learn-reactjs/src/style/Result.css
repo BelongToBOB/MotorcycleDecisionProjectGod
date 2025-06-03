@@ -1,0 +1,238 @@
+.section-result {
+    background-image: url("../images/greymotocbr1000blur.png");
+    background-size: cover;
+    min-height: 100vh;
+    overflow: auto;
+}
+
+.main-box {
+    max-width: 1400px;
+    width: 90%;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  
+  .first-side-box {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    gap: 2rem;
+    background-color: #dcdcdc;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+  }
+
+.result-image {
+    max-width: 500px;
+    width: 100%;
+    padding: 2rem;
+}
+
+.bestBike-text h1 {
+    padding: 0.5rem;
+    font-size: 50px;
+    font-weight: 700;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.bestBike-text1 {
+    color: red;
+}
+
+.bestBike-text2 {
+    margin-left: 2rem;
+}
+
+.bestRank {
+    display: inline-block;
+    margin-right: 0;
+}
+
+.bestRank1, .bestRank2 {
+    padding: 0.5rem;
+    font-size: 50px;
+    font-weight: 700;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    text-align: right;
+}
+
+.bestRank1 {
+    color: red;
+}
+
+.info-result-box {
+    background-color: #807C7C;
+    padding: 2rem;
+    border-radius: 10px;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.space-btn {
+    display: flex;
+    padding: 0.5rem;
+    gap: 5rem;
+    justify-content: center;
+}
+
+.moreInfo-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    background: red;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.moreInfo-btn2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    background:  #dcdcdc;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.Star-img {
+    max-width: 25px;
+    width: 100%;
+    margin-left: 0.5rem;
+}
+
+.near-choice-text {
+    margin-top: 2rem;
+}
+
+.near-choice-box {
+    display: flex;
+    align-items: center;
+    background-color: #dcdcdc;
+    padding: 2rem;
+    border-radius: 10px;
+    gap: 80px;
+    margin-bottom: 2rem;
+}
+
+.near-choice-box h1 {
+    padding: 0.5rem;
+    font-size: 80px;
+    font-weight: 700;
+    color: black;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.box-image img {
+    max-width: 300px;
+    width: 100%;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.near-choice-box-info {
+    display: inline-block;
+    flex-wrap: wrap; 
+}
+
+.near-choice-box-info h3 {
+    font-size: 30px;
+    font-weight: 500;
+    color: black;
+}
+
+.moreInfo-btn-near-choice {
+    display: flex;
+    padding: 10px 30px;
+    background: #ff0000;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.near-choice-btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+    .first-side-box {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .bestBike-text h1,
+    .bestRank1,
+    .bestRank2 {
+      font-size: 30px;
+      text-align: center;
+    }
+  
+    .result-image {
+      max-width: 100%;
+      padding: 1rem;
+    }
+  
+    .info-result-box {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .space-btn {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .near-choice-box {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  
+    .near-choice-box h1 {
+      font-size: 50px;
+    }
+  
+    .box-image img {
+      max-width: 200px;
+    }
+  
+    .near-choice-box-info h3 {
+      font-size: 18px;
+      text-align: center;
+    }
+  
+    .moreInfo-btn-near-choice {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .near-choice-btn-container {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+  

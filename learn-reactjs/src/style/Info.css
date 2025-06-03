@@ -1,0 +1,145 @@
+.findBike {
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    background-image: url(https://images.unsplash.com/photo-1632157256768-b966287a6413?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    display: flex;
+    justify-content: center;
+    min-height: 300px;
+    align-items: center;
+}
+
+.findbike-box {
+    text-align: center;
+}
+
+.findbike-box h1 {
+    text-align: center;
+    padding: 1rem;
+    font-size: 35px;
+    font-weight: 300;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 5px rgb(0, 0, 0);
+}
+
+.searchbrand {
+    display: flex;
+    justify-content: center;
+}
+
+.searchbrand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .search-btn {
+    padding: 0.45rem 1.3rem;
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .search-btn:hover {
+    background: #e63333;
+  }
+  
+
+.bikebrand {
+    display: flex;
+    padding: 0.3rem;
+    width: 19rem;
+    height: 3.7rem;
+    border-radius: 5px;
+    border: none;
+    justify-content: center;
+    
+}
+
+.findbike-box h6 {
+    margin: 1rem;
+    margin-top: 2.5rem;
+    font-size: 1rem;
+    color: #fff;
+    text-shadow: 1px 1px 5px rgb(0, 0, 0);
+}
+
+.type-container{
+    text-align: center;
+    background-color: #fff;
+}
+
+.type-container h1{
+    margin-bottom: 1rem;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.typebike {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+}
+
+.typebike-box{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+}
+
+.typebike-box-brand{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+    padding: 1rem;
+}
+
+.typebike-box img{
+    width: 100%;
+    height: 200px;
+}
+
+.typebike-box-brand img{
+    width: 100%;
+    height: 100px;
+}
+
+.typebike-box p {
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .typebike-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bikebrand {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .typebike-box {
+        grid-template-columns: 1fr;
+    }
+
+    .typebike {
+        padding: 0.5rem;
+    }
+
+    .findbike-box h1 {
+        font-size: 24px;
+    }
+
+    .findbike-box h6 {
+        font-size: 0.9rem;
+    }
+}

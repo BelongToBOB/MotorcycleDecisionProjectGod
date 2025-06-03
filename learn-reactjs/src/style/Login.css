@@ -1,0 +1,102 @@
+.login-section {
+    background-image: url("../images/loginblur.png");
+    background-size: cover;
+    min-height: 100vh;
+}
+
+
+.w-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    width: 100%;
+}
+
+.login_box{
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 5rem;
+    text-align: center;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.login_box h1{
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.login-email {
+    margin-left: 5px;
+    margin-top: 1rem;
+    padding: 0.3rem;
+    width: 15rem;
+    height: 3rem;
+}
+
+.login-password{
+    margin-left: 5px;
+    padding: 0.3rem;
+    width: 15rem;
+    height: 3rem;
+}
+
+.enter-button {
+    margin-top: 1.3rem;
+    padding: 0.3rem;
+    width: 15rem;
+    height: 3rem;
+    background-color: red;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.enter-button{
+    font-size: normal;
+    font-weight: 500;
+}
+
+.forgotpass {
+    font-size: small;
+    margin-left: 7rem;
+    margin-top: 0.3rem;
+    cursor: pointer;
+}
+
+.register {
+    display: flex;
+    margin-top: 2rem;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+}
+
+.register a {
+    color: #0026ff;
+}
+
+.user-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    color: rgb(0, 0, 0);
+  }
+  
+  .logout-button {
+    background-color: #eb2914;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+.logout-button:hover {
+    background-color: #dd5749;
+}
+  

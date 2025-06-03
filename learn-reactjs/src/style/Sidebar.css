@@ -1,0 +1,123 @@
+/* Sidebar base */
+.sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .sidebar h1 {
+    padding: 1rem;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  /* Sidebar links */
+  .nav-link {
+    display: block;
+    padding: 12px 0;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.2s;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  
+  /* Close Button */
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: white;
+    float: right;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  /* Topbar */
+  .topbar {
+    background-color: #2c3e50;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .menu-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .page-title {
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  /* ===== Responsive Design ===== */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px;
+      padding: 15px;
+    }
+  
+    .sidebar h1 {
+      font-size: 18px;
+    }
+  
+    .nav-link {
+      font-size: 16px;
+      padding: 10px 0;
+    }
+  
+    .topbar {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px;
+    }
+  
+    .menu-btn {
+      font-size: 24px;
+    }
+  
+    .page-title {
+      font-size: 18px;
+      margin-left: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .sidebar {
+      width: 180px;
+    }
+  
+    .nav-link {
+      font-size: 15px;
+    }
+  
+    .page-title {
+      font-size: 16px;
+    }
+  }
+  

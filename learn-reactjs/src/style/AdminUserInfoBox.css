@@ -1,0 +1,65 @@
+.info-user-box {
+    display: flex;
+    justify-content: space-between;
+    background-color: #dcdcdc;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.info-part {
+    display: flex;
+    gap: 10px;
+}
+
+.info-user-img img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .info-user-box {
+    display: flex;
+    justify-content: space-between;
+    background-color: #dcdcdc;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.info-part {
+    display: flex;
+    gap: 10px;
+}
+
+.info-user-img img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+.edit-part {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.edit-part .edit-btn {
+    background-color: #ffb52d;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+}
+
+.edit-part .delete-btn {
+    background-color: red;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+}

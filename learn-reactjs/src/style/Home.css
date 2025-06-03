@@ -1,0 +1,275 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Kanit", serif;
+    /* background-color: #858585; */
+}
+
+.main-container {
+    background-image: url("../images/suzukiblur.png");
+    background-color: #8b8a8a;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
+section {
+    background-color: #ffffff;
+}
+
+.text-wrap-con{
+    background-color: #fff;
+    display: flex;
+    padding: 1rem;
+}
+
+.text-wrap-con h2 {
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 45px;
+    color: rgb(0, 0, 0);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin-left: 0.7rem;
+    }
+
+.text-wrap-con a {
+    font-family: "Anton", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 45px;
+    color: rgb(255, 0, 0);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.text-wrap-con .a2 {
+    font-family: "Anton", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 45px;
+    color: rgb(0, 0, 0);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #d6d6d6;
+    gap: 1rem;
+    flex-wrap: wrap; /* รองรับหน้าจอเล็ก */
+  }
+  
+  .hero-content {
+    flex: 2;
+    max-width: 800px;
+    margin: 1rem;
+  }
+  
+  .hero-content h3 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .hero-content h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .hero-content a {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .cta-button {
+    display: flex;
+    margin-top: 1rem;
+    background-color: red;
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  
+  .cta-button:hover {
+    background-color: darkred;
+  }
+  
+  .hero-image img {
+    display: flex;
+    width: 390px;
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+.mini-text {
+    display: flex;
+    justify-content: center;
+    align-content: center ;
+    padding: 0.5rem;
+    margin-bottom: 3rem;
+}
+
+.hot-section {
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: #d9d9d9;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    background-color: red;
+    display: flex;
+    padding: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    
+  }
+  
+  .bike-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .bike-card.reverse {
+    flex-direction: row-reverse;
+  }
+
+  @media screen and (max-width: 768px) {
+    .bike-img img{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bike-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  
+  .bike-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 700px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .bike-img-zt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  
+  .bike-info {
+    width: 100%;
+    padding: 5rem 3rem;
+    border-radius: 8px;
+    color: white;
+    display: inline-block;
+    background-color: #333;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+  }
+
+  .bike-info h3 {
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+    font-size: 45px;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .bike-info p {
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+
+.firstgridbox{
+    /* background-color: #767676; */
+    display: grid;
+    grid-template-columns: 2fr 1fr  ;
+    grid-template-rows: 275px 275px;
+    gap: 5px;
+    padding: 18px;
+    border-radius: 5px ;
+    margin: 1rem;
+}
+
+.news {
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+.firstbox img {
+    width: 100%;           
+    height: 100%;          
+    object-fit: cover;     
+    /* border-radius: 5px;  */
+}
+
+.firstbox:hover img {
+    transform: scale(1.05);
+    transition: 0.7s;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.firstbox:nth-child(1) {
+    grid-row: 1/3;
+}
+
+/* .firstbox:nth-child(2) {
+    grid-column: 2/5;
+    grid-row: 1/2;
+}
+ */
+
+footer {
+    background-color:  #000000;
+    padding: 1rem;
+}
+
+.footer-menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-menu a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-menu ul {
+    list-style: none;
+    display: flex;
+}
+
+.footer-menu li {
+    margin-right: 1rem;
+}
+
+.footer-menu ul li a {
+    text-transform: uppercase;
+    font-size: 14px;
+}

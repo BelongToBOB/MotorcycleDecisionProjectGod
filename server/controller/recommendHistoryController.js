@@ -22,6 +22,7 @@ exports.create = async (req, res) => {
     });
     res.status(201).json(history);
   } catch (err) {
+    console.error('SAVE HISTORY ERROR:', err);
     res.status(500).json({ message: 'Server Error', err });
   }
 };

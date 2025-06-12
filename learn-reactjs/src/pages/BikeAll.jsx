@@ -4,11 +4,13 @@ import Footer from "../components/Footer";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import BikeCard from "../components/BikeCard";
+import BikeDetailCard from "../components/BikeDetailCard";
 import "../style/BikeAll.css";
 
 export default function BikeAll() {
   const [bikes, setBikes] = useState([]);
   const [types, setTypes] = useState([]);
+  const [selectedBike, setSelectedBike] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -32,13 +34,11 @@ export default function BikeAll() {
   if (type) {
     filteredBikes = filteredBikes.filter(b => String(b.moto_type_id) === String(type));
   }
-
   if (brand) {
     filteredBikes = filteredBikes.filter(b =>
       b.moto_brand?.toLowerCase() === brand.toLowerCase()
     );
   }
-
   if (search) {
     const s = search.toLowerCase();
     filteredBikes = filteredBikes.filter(b =>
@@ -46,8 +46,6 @@ export default function BikeAll() {
       (b.moto_brand && b.moto_brand.toLowerCase().includes(s))
     );
   }
-
-  const typeName = type ? types.find(t => String(t.id) === String(type))?.moto_type_name : null;
 
   const brands = [...new Set(filteredBikes.map(b => b.moto_brand))];
 
@@ -68,12 +66,16 @@ export default function BikeAll() {
                 {filteredBikes
                   .filter((b) => b.moto_brand === brand)
                   .map((bike) => (
-                    <BikeCard key={bike.id} bike={bike} />
+                    <BikeCard key={bike.id} bike={bike} onDetail={() => setSelectedBike(bike)} />
                   ))}
               </div>
             </div>
           ))}
         </div>
+        <BikeDetailCard
+          bike={selectedBike}
+          onClose={() => setSelectedBike(null)}
+        />
       </section>
     </>
   );

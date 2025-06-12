@@ -7,17 +7,17 @@ const criteriaMeta = [
   { key: "moto_cc", label: "CC" },
   { key: "maintenance_cost", label: "Maintenance Cost" },
   { key: "consumption_rate", label: "Fuel Consumption" },
-  { key: "fuel_size", label: "Fuel Tank Size" },
-  { key: "moto_weight", label: "Weight" }
+  // { key: "fuel_size", label: "Fuel Tank Size" },
+  // { key: "moto_weight", label: "Weight" }
 ];
 
 const priorityKeyMap = {
   price: "moto_price",
   cc: "moto_cc",
-  fuel_size: "fuel_size",
+  // fuel_size: "fuel_size",
   consumption: "consumption_rate",
   maintenance: "maintenance_cost",
-  weight: "moto_weight"
+  // weight: "moto_weight"
 };
 
 exports.recommend = async (req, res) => {
@@ -32,34 +32,27 @@ exports.recommend = async (req, res) => {
     }  
 
     if (criteria) {
-      if (criteria.price === "ต่ำกว่า 50,000 บาท") where.moto_price = { lt: 50000 };
-      if (criteria.price === "50,000 - 80,000 บาท") where.moto_price = { gte: 50000, lte: 80000 };
-      if (criteria.price === "80,001 - 150,000 บาท") where.moto_price = { gte: 80001, lte: 150000 };
-      if (criteria.price === "150,001 - 300,000 บาท") where.moto_price = { gte: 150001, lte: 300000 };
-      if (criteria.price === "300,001 - 600,000 บาท") where.moto_price = { gte: 300001, lte: 600000 };
-      if (criteria.price === "600,001 - 1,000,000 บาท") where.moto_price = { gte: 600001, lte: 1000000 };
-      if (criteria.price === "มากกว่า 1,000,000 บาท") where.moto_price = { gt: 1000000 };
+      if (criteria.price === "ไม่เกิน 50,000 บาท") where.moto_price = { lt: 50001 };
+      if (criteria.price === "50,000 - 100,000 บาท") where.moto_price = { gte: 50000, lte: 100000 };
+      if (criteria.price === "100,000 - 200,000 บาท") where.moto_price = { gte: 100000, lte: 200000 };
+      if (criteria.price === "200,000 - 500,000 บาท") where.moto_price = { gte: 200000, lte: 500000 };
+      if (criteria.price === "มากกว่า 500,000 บาท") where.moto_price = { gt: 500000 };
       if (criteria.cc === "110-125 cc") where.moto_cc = { gte: 110, lte: 125 };
-      if (criteria.cc === "126-200 cc") where.moto_cc = { gte: 126, lte: 200 };
-      if (criteria.cc === "201-400 cc") where.moto_cc = { gte: 201, lte: 400 };
-      if (criteria.cc === "401-700 cc") where.moto_cc = { gte: 401, lte: 700 };
-      if (criteria.cc === "701-999 cc") where.moto_cc = { gte: 701, lte: 999 };
-      if (criteria.cc === "999 cc ขึ้นไป") where.moto_cc = { gte: 999 };
-      if (criteria.fuel_size === "น้อยกว่า 7.9 ลิตร") where.fuel_size = { lt: 7.9 };
-      if (criteria.fuel_size === "8-10.9 ลิตร") where.fuel_size = { gte: 8, lte: 10.9 };
-      if (criteria.fuel_size === "11-14.9 ลิตร") where.fuel_size = { gte: 11, lte: 14.9 };
-      if (criteria.fuel_size === "15-19.9 ลิตร") where.fuel_size = { gte: 15, lte: 19.9 };
-      if (criteria.fuel_size === "มากกว่า 20 ลิตร") where.fuel_size = { gt: 20 };
-      if (criteria.fuel === "50-60 กม./ลิตร") where.consumption_rate = { gte: 50, lte: 60 };
-      if (criteria.fuel === "40-49 กม./ลิตร") where.consumption_rate = { gte: 40, lte: 49 };
-      if (criteria.fuel === "30-39 กม./ลิตร") where.consumption_rate = { gte: 30, lte: 39 };
-      if (criteria.fuel === "20-29 กม./ลิตร") where.consumption_rate = { gte: 20, lte: 29 };
-      if (criteria.fuel === "ต่ำกว่า 20 กม./ลิตร") where.consumption_rate = { lt: 20 };
+      if (criteria.cc === "126-160 cc") where.moto_cc = { gte: 126, lte: 160 };
+      if (criteria.cc === "161-300 cc") where.moto_cc = { gte: 161, lte: 300 };
+      if (criteria.cc === "301-500 cc") where.moto_cc = { gte: 301, lte: 500 };
+      if (criteria.cc === "500 cc ขึ้นไป") where.moto_cc = { gte: 999 };
+      // if (criteria.fuel_size === "น้อยกว่า 8 ลิตร") where.fuel_size = { lt: 8 };
+      // if (criteria.fuel_size === "8-12 ลิตร") where.fuel_size = { gte: 8, lte: 12 };
+      // if (criteria.fuel_size === "มากกว่า 12 ลิตร") where.fuel_size = { gt: 12 };
+      if (criteria.fuel === "60-40 กม./ลิตร") where.consumption_rate = { gte: 40, lte: 60 };
+      if (criteria.fuel === "40-30 กม./ลิตร") where.consumption_rate = { gte: 30, lte: 40 };
+      if (criteria.fuel === "30-20 กม./ลิตร") where.consumption_rate = { gte: 20, lte: 30 };
+      if (criteria.fuel === "ต่ำกว่า 20 กม./ลิตร (ขับขี่เน้นสมรรถนะที่สูง)") where.consumption_rate = { lt: 20 };
       if (criteria.maintenance === "ต่ำกว่า 2,000 บาท/ปี") where.maintenance_cost = { lt: 2000 };
-      if (criteria.maintenance === "2,001 - 5,000 บาท/ปี") where.maintenance_cost = { gte: 2001, lte: 5000 };
-      if (criteria.maintenance === "5,001 - 10,000 บาท/ปี") where.maintenance_cost = { gte: 5001, lte: 10000 };
-      if (criteria.maintenance === "10,001 - 20,000 บาท/ปี") where.maintenance_cost = { gte: 10001, lte: 20000 };
-      if (criteria.maintenance === "มากกว่า 20,000 บาท/ปี") where.maintenance_cost = { gt: 20000 };
+      if (criteria.maintenance === "2,000 - 5,000 บาท/ปี") where.maintenance_cost = { gte: 2000, lte: 5000 };
+      if (criteria.maintenance === "5,000 - 10,000 บาท/ปี") where.maintenance_cost = { gte: 5000, lte: 10000 };
+      if (criteria.maintenance === "มากกว่า 10,000 บาท/ปี") where.maintenance_cost = { gt: 10000 };
     }
 
     // --- Query

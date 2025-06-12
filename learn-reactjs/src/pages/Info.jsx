@@ -58,10 +58,7 @@ export default function Info() {
     const fetchTypes = async () => {
       try {
         const token = localStorage.getItem("token");
-        if (!token) {
-          navigate('/Login');
-          return;
-        }
+        
         const res = await axios.get("http://localhost:5000/api/mototype", {
           headers: { Authorization: `Bearer ${token}` }
         });

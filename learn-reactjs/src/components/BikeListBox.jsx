@@ -14,7 +14,7 @@ export default function BikeListBox({ bike, onDelete }) {
           <p>ยี่ห้อ: {bike.moto_brand}</p>
           <p>น้ำหนัก: {bike.moto_weight}</p>
           <p>cc: {bike.moto_cc}</p>
-          <p>ค่าบำรุงรักษา: {bike.maintenance_cost}</p>
+          <p>ค่าบำรุงรักษาปีแรก: {bike.maintenance_cost}</p>
           <p>อัตราสิ้นเปลือง: {bike.consumption_rate}</p>
           <p>เนื้อหา: {bike.moto_content}</p>
           <p>ราคา: {bike.moto_price}</p>

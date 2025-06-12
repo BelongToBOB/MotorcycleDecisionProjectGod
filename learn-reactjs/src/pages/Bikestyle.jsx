@@ -11,6 +11,11 @@ export default function BikeStyle() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+      if (!token) {
+        navigate('/Login');
+        return;
+      }
     axios.get("http://localhost:5000/api/mototype", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     })

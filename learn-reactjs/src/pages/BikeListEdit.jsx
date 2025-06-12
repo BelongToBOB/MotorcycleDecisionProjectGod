@@ -106,7 +106,7 @@ export default function BikeListEdit() {
                     <input name="moto_name" className='bike-name-input' value={form.moto_name} onChange={handleChange} />
                     </div>
                     <div className='bike-manter'>
-                    <h3>ค่าบำรุงรักษา</h3>
+                    <h3>ค่าบำรุงรักษาปีแรก</h3>
                     <input name="maintenance_cost" className='bike-manter-input' value={form.maintenance_cost} onChange={handleChange} />
                     </div>
                     <div className='bike-kml'>

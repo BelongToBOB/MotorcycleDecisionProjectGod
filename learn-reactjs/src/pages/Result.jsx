@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Navbar from '../components/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/Result.css';
 import Star from '../images/star.png';
+import BikeDetailCard from "../components/BikeDetailCard";
 import { useRecommend } from '../context/RecommendContext';
 
 export default function Result() {
   const { selectedType, priority, criteria } = useRecommend();
   const [results, setResults] = useState(null);
+  const [selectedBike, setSelectedBike] = useState(null);
   const navigate = useNavigate();
+  const [historySaved, setHistorySaved] = useState(false);  // <--- state สำหรับป้องกัน
+  const hasPosted = useRef(false); // <--- อีกวิธี, แบบ ref
 
   useEffect(() => {
     // ป้องกันกรณี reload result ตรง
@@ -37,13 +41,13 @@ export default function Result() {
   useEffect(() => {
     if (!results || !results.length) return;
 
-    const historyKey = `recommendHistorySaved_${selectedType}_${JSON.stringify(priority)}_${JSON.stringify(criteria)}`;
-    if (sessionStorage.getItem(historyKey)) return;
-    sessionStorage.setItem(historyKey, "1");
-  
+    // จะรันแค่ครั้งเดียว per mount (หรือ per query)
+    if (hasPosted.current) return;
+    hasPosted.current = true;
+
     const token = localStorage.getItem("token");
     if (!token) return;
-  
+
     const historyData = {
       selectedType,
       priority,
@@ -56,7 +60,6 @@ export default function Result() {
       }))
     };
 
-  
     fetch('http://localhost:5000/api/recommend-history', {
       method: 'POST',
       headers: {
@@ -66,11 +69,14 @@ export default function Result() {
       body: JSON.stringify(historyData)
     }).then(res => {
       if (!res.ok) return res.json().then(e => { throw e });
+      setHistorySaved(true); // <--- set flag
       return res.json();
     }).catch(e => {
       console.warn("Cannot save recommend history:", e.message);
     });
-  }, [results, selectedType, priority, criteria]);  
+  }, [results, selectedType, priority, criteria]);
+
+  
 
   if (!results) {
     return <div>Loading...</div>
@@ -109,8 +115,12 @@ export default function Result() {
                 <p>{best.moto_content}</p>
                 <h1 className='info-result-box4'>ราคา {best.moto_price?.toLocaleString()} บาท</h1>
                 <div className='space-btn'>
-                  <button className="moreInfo-btn">เพิ่มเติม</button>
-                  <button className="moreInfo-btn2">5<img className="Star-img" src={Star} alt="" /></button>
+                  <button
+                    className="moreInfo-btn"
+                    onClick={() => setSelectedBike(best)}
+                  >
+                    เพิ่มเติม
+                  </button>                 
                 </div>
               </div>
             </div>
@@ -130,10 +140,20 @@ export default function Result() {
                 <h3>ประเภท : {item.moto_type?.moto_type_name || "-"}</h3>
                 <h3>ราคา : {item.moto_price?.toLocaleString()} บาท</h3>
               </div>
-              <button className="moreInfo-btn-near-choice">เพิ่มเติม</button>
+              <button
+                className="moreInfo-btn-near-choice"
+                onClick={() => setSelectedBike(item)}
+              >
+                เพิ่มเติม
+              </button>
+
             </div>
           ))}
         </div>
+        <BikeDetailCard
+          bike={selectedBike}
+          onClose={() => setSelectedBike(null)}
+        />
       </section>
     </>
   )

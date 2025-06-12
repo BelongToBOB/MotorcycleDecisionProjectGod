@@ -9,8 +9,8 @@ const criteriaInit = [
   { id: "cc", label: "CC" },
   { id: "maintenance", label: "ค่าบำรุงรักษา" },
   { id: "consumption", label: "อัตราสิ้นเปลือง" },
-  { id: "fuel_size", label: "ขนาดถังน้ำมัน" },
-  { id: "weight", label: "น้ำหนัก" },
+  // { id: "fuel_size", label: "ขนาดถังน้ำมัน" },
+  // { id: "weight", label: "น้ำหนัก" },
 ];
 
 export default function Prioritize() {

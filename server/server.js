@@ -10,6 +10,7 @@ const recommendRoute = require('./routes/recommend');
 const userRoutes = require('./routes/user');
 const recommendHistoryRouter = require('./routes/recommendHistory');
 const statisticRoute = require('./routes/statistic');
+const criteriaRoutes = require('./routes/criteriaRoutes');
 
 //middleware
 app.use(morgan('dev'))
@@ -26,6 +27,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/recommend-history', recommendHistoryRouter);
 app.use('/api/statistic', statisticRoute);
 app.use('/api/message', require('./routes/message'));
+app.use('/api', criteriaRoutes);
 
 
 readdirSync('./routes')

@@ -23,7 +23,6 @@ import KTM from '../images/brandLogo/KTMLogo-removebg-preview.png'
 import Aprilia from '../images/brandLogo/aprilia-logo-removebg-preview.png'
 import Idm from '../images/brandLogo/indian-motorcycle-logo-removebg-preview.png'
 import Scomadi from '../images/brandLogo/scomadi-logo-png-removebg-preview.png'
-import Italjet from '../images/brandLogo/italjetLogo-removebg-preview.png'
 import Zontes from '../images/brandLogo/ZONTES-logo-removebg-preview.png'
 
 const brandOptions = [
@@ -33,18 +32,17 @@ const brandOptions = [
   { key: "Suzuki", img: Suzuki, alt: "Suzuki" },
   { key: "Gpx", img: Gpx, alt: "Gpx" },
   { key: "Royal Enfield", img: Re, alt: "Re" },
-  { key: "Bmw", img: Bmw, alt: "Bmw" },
+  { key: "BMW Motorrad", img: Bmw, alt: "BMW Motorrad" },
   { key: "Ducati", img: Ducati, alt: "Ducati" },
   { key: "Haley Davidson", img: Hld, alt: "Hld" },
   { key: "Triumph", img: Triumph, alt: "Triumph" },
   { key: "Vespa", img: Vespa, alt: "Vespa" },
   { key: "Lambretta", img: Lambretta, alt: "Lambretta" },
   { key: "Benelli", img: Benelli, alt: "Benelli" },
-  { key: "Ktm", img: KTM, alt: "KTM" },
+  { key: "KTM", img: KTM, alt: "KTM" },
   { key: "Aprilia", img: Aprilia, alt: "Aprilia" },
   { key: "Indian Motorcycle", img: Idm, alt: "Idm" },
   { key: "Scomadi", img: Scomadi, alt: "Scomadi" },
-  { key: "Italjet", img: Italjet, alt: "Italjet" },
   { key: "Zontes", img: Zontes, alt: "Zontes" },
 ];
 

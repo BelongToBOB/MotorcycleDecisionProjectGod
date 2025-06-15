@@ -47,7 +47,7 @@ export default function Prioritize() {
           <div className="content-box-prioritize">
             {/* ซ้าย: ตัวเลือก */}
             <div className="options">
-              <h2>เลือกเกณฑ์ </h2>
+              <h2>จัดลำดับเกณฑ์ </h2>
               {left.length === 0 && <div style={{color:'#888'}}>เลือกหมดแล้ว</div>}
               {left.map((item) => (
                 <button key={item.id} onClick={() => handleSelect(item.id)}>

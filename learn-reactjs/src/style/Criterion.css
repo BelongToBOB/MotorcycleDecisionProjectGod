@@ -168,6 +168,15 @@
     gap: 10;
 }
 
+.check-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+
+
+
 
 
   

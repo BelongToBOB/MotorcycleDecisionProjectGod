@@ -37,18 +37,19 @@ exports.recommend = async (req, res) => {
       if (criteria.price === "100,000 - 200,000 บาท") where.moto_price = { gte: 100000, lte: 200000 };
       if (criteria.price === "200,000 - 500,000 บาท") where.moto_price = { gte: 200000, lte: 500000 };
       if (criteria.price === "มากกว่า 500,000 บาท") where.moto_price = { gt: 500000 };
+
       if (criteria.cc === "110-125 cc") where.moto_cc = { gte: 110, lte: 125 };
       if (criteria.cc === "126-160 cc") where.moto_cc = { gte: 126, lte: 160 };
       if (criteria.cc === "161-300 cc") where.moto_cc = { gte: 161, lte: 300 };
       if (criteria.cc === "301-500 cc") where.moto_cc = { gte: 301, lte: 500 };
-      if (criteria.cc === "500 cc ขึ้นไป") where.moto_cc = { gte: 999 };
-      // if (criteria.fuel_size === "น้อยกว่า 8 ลิตร") where.fuel_size = { lt: 8 };
-      // if (criteria.fuel_size === "8-12 ลิตร") where.fuel_size = { gte: 8, lte: 12 };
-      // if (criteria.fuel_size === "มากกว่า 12 ลิตร") where.fuel_size = { gt: 12 };
+      if (criteria.cc === "501-999 cc") where.moto_cc = { gte: 501, lte: 995 };
+      if (criteria.cc === "1000 cc ขึ้นไป") where.moto_cc = { gte: 996 };
+
       if (criteria.fuel === "60-40 กม./ลิตร") where.consumption_rate = { gte: 40, lte: 60 };
       if (criteria.fuel === "40-30 กม./ลิตร") where.consumption_rate = { gte: 30, lte: 40 };
       if (criteria.fuel === "30-20 กม./ลิตร") where.consumption_rate = { gte: 20, lte: 30 };
       if (criteria.fuel === "ต่ำกว่า 20 กม./ลิตร (ขับขี่เน้นสมรรถนะที่สูง)") where.consumption_rate = { lt: 20 };
+
       if (criteria.maintenance === "ต่ำกว่า 2,000 บาท/ปี") where.maintenance_cost = { lt: 2000 };
       if (criteria.maintenance === "2,000 - 5,000 บาท/ปี") where.maintenance_cost = { gte: 2000, lte: 5000 };
       if (criteria.maintenance === "5,000 - 10,000 บาท/ปี") where.maintenance_cost = { gte: 5000, lte: 10000 };
@@ -114,7 +115,7 @@ exports.recommend = async (req, res) => {
     });
 
     // 9. Return result
-    res.json(ranked.slice(0, 5));
+    res.json(ranked.slice(0, 11));
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });

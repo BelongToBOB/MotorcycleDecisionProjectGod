@@ -92,7 +92,7 @@ export default function Result() {
   }
 
   const best = results[0];
-  const others = results.slice(1, 5);
+  const others = results.slice(1, 11);
 
   return (
     <>
@@ -107,7 +107,7 @@ export default function Result() {
             </div>
             <div className='bestRank'>
               <h1 className='bestRank1'>อันดับที่ 1</h1>
-              <h1 className='bestRank2'>{best.moto_name}</h1>
+              <h1 className='bestRank2'>{best.moto_brand}<a> </a>{best.moto_name}</h1>
               <div className='info-result-box'>
                 <h1 className='info-result-box1'>ยี่ห้อ : {best.moto_brand}</h1>
                 <h1 className='info-result-box2'>ประเภท : {best.moto_type?.moto_type_name || "-"}</h1>

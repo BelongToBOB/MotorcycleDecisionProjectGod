@@ -53,6 +53,7 @@ exports.create = async (req, res) => {
     const newMC = await prisma.motorcycle.create({ data });
     res.json(newMC);
   } catch (err) {
+    console.error("Motorcycle Post error:", err); 
     res.status(500).json({ message: 'Server Error', err });
   }
 };

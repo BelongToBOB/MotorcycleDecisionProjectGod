@@ -26,7 +26,7 @@ function Navbar() {
         <div className="menu">
           <Link to={'/'}>หน้าหลัก</Link>
           <Link to={'/Info'}>ข้อมูลรถ</Link>
-          <a href="recommend.html">แนะนำ</a>
+          <a href="#">แนะนำ</a>
           <Link to={'/Contact'}>ติดต่อเรา</Link>
         </div>
         <div className="loginform">

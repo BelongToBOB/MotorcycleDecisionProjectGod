@@ -1,7 +1,7 @@
 const prisma = require('../config/prisma')
 const bcrypt = require('bcryptjs')
 
-// GET /api/admin    (list แอดมินทุกคน)
+
 exports.getAllAdmins = async (req, res) => {
   try {
     const admins = await prisma.user.findMany({
@@ -13,20 +13,21 @@ exports.getAllAdmins = async (req, res) => {
   }
 }
 
-// GET /api/admin/:id   (ดูแอดมิน 1 คน)
+
 exports.getAdminById = async (req, res) => {
   try {
     const admin = await prisma.user.findUnique({
-      where: { id: Number(req.params.id) }
+      where: { user_id: Number(req.params.id) }
     })
     if (!admin || admin.role !== 'admin') return res.status(404).json({ message: 'Not found' })
     res.json(admin)
   } catch (err) {
+    console.error("GET ADMIN ERROR:", err);
     res.status(500).json({ message: 'Server error' })
   }
 }
 
-// PUT /api/admin/:id   (อัปเดตแอดมิน)
+
 exports.updateAdmin = async (req, res) => {
     try {
       const { username, email, phone, address, picture, password } = req.body;
@@ -37,7 +38,7 @@ exports.updateAdmin = async (req, res) => {
         dataToUpdate.password = hashPassword;
       }
       await prisma.user.update({
-        where: { id: Number(req.params.id) },
+        where: { user_id: Number(req.params.id) },
         data: dataToUpdate,
       });
       res.send("Update Success");
@@ -46,11 +47,11 @@ exports.updateAdmin = async (req, res) => {
     }
   };
 
-// DELETE /api/admin/:id   (ลบแอดมิน)
+
 exports.deleteAdmin = async (req, res) => {
   try {
     await prisma.user.delete({
-      where: { id: Number(req.params.id) }
+      where: { user_id: Number(req.params.id) }
     })
     res.json({ message: 'ลบสำเร็จ' })
   } catch (err) {

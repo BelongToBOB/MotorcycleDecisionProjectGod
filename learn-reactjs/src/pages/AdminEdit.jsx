@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import ImageUploader from "../components/ImageUploader";
 
 export default function AdminEdit() {
-  const { id } = useParams();
+  const { user_id } = useParams();
   const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
@@ -23,7 +23,7 @@ export default function AdminEdit() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/admin/${id}`, {
+      .get(`http://localhost:5000/api/admin/${user_id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => {
@@ -42,7 +42,7 @@ export default function AdminEdit() {
         toast.error("ไม่พบข้อมูลแอดมิน");
         navigate("/AdminBo");
       });
-  }, [id, navigate]);
+  }, [user_id, navigate]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -58,7 +58,7 @@ export default function AdminEdit() {
       if (!form.password) delete updateBody.password;
       delete updateBody.confirmPassword;
 
-      await axios.put(`http://localhost:5000/api/admin/${id}`, updateBody, {
+      await axios.put(`http://localhost:5000/api/admin/${user_id}`, updateBody, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       toast.success("อัปเดตข้อมูลสำเร็จ");
@@ -96,7 +96,7 @@ export default function AdminEdit() {
                   <input
                     type="text"
                     className="admin-id-input"
-                    value={id}
+                    value={user_id}
                     disabled
                   />
                 </div>

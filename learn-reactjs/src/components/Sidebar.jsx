@@ -28,7 +28,7 @@ export default function Sidebar() {
         <Link to={'/BikeList'} className="nav-link">รถจักรยานยนต์</Link>
         <Link to={'/AdminMessage'} className="nav-link">ข้อความ</Link>
         <Link to={'/Statistic'} className="nav-link">สถิติ</Link>
-        <Link className="nav-link" onClick={handleLogout}>
+        <Link className="nav-link" onClick={handleLogout} to={'/'}>
           ลงชื่อออก
         </Link>
       </div>

@@ -12,15 +12,15 @@ export default function BikeStyle() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-      if (!token) {
-        navigate('/Login');
-        return;
-      }
+    if (!token) {
+      navigate('/Login');
+      return;
+    }
     axios.get("http://localhost:5000/api/mototype", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+      headers: { Authorization: `Bearer ${token}` }
     })
-    .then(res => setTypes(res.data))
-    .catch(() => setTypes([]));
+      .then(res => setTypes(res.data))
+      .catch(() => setTypes([]));
   }, []);
 
   const handleSelectType = (typeId) => {
@@ -40,11 +40,11 @@ export default function BikeStyle() {
               {types.map(type => (
                 <div
                   className="type-choice"
-                  key={type.id}
+                  key={type.moto_type_id}
                   style={{
-                    border: selectedType === type.id ? "2px solid red" : "1px solid #ddd",  
+                    border: selectedType === type.moto_type_id ? "2px solid red" : "1px solid #ddd",
                   }}
-                  onClick={() => handleSelectType(type.id)}
+                  onClick={() => handleSelectType(type.moto_type_id)}
                   tabIndex={0}
                   title={type.moto_type_name}
                 >

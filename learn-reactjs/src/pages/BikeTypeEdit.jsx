@@ -24,31 +24,31 @@ export default function BikeTypeEdit() {
     .catch(() => toast.error("โหลดข้อมูลไม่สำเร็จ"))
   }, []);
   
-  const handleDelete = async id => {
-    const result = await Swal.fire({
-      title: 'ยืนยันลบประเภทนี้?',
-      text: 'หากลบประเภทนี้ รถจักรยานยนต์ประเภทนี้จะไม่สามารถใช้งานได้',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'ลบ',
-      cancelButtonText: 'ยกเลิก',
-      confirmButtonColor: "#e74c3c",
-      cancelButtonColor: "#3085d6"
-    });
-  
-    if (result.isConfirmed) {
-      try {
-        await axios.delete(`http://localhost:5000/api/mototype/${id}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
-        });
-        setTypes(types.filter(type => type.id !== id));
-        Swal.fire('สำเร็จ', 'ลบข้อมูลสำเร็จ', 'success');
-      } catch (err) {
-        const msg = err?.response?.data?.message;
-        Swal.fire('ลบไม่สำเร็จ', msg || 'เกิดข้อผิดพลาดที่ server', 'error');
-      }
+  const handleDelete = async (moto_type_id) => {
+  const result = await Swal.fire({
+    title: 'ยืนยันลบประเภทนี้?',
+    text: 'หากลบประเภทนี้ รถจักรยานยนต์ประเภทนี้จะไม่สามารถใช้งานได้',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'ลบ',
+    cancelButtonText: 'ยกเลิก',
+    confirmButtonColor: "#e74c3c",
+    cancelButtonColor: "#3085d6"
+  });
+
+  if (result.isConfirmed) {
+    try {
+      await axios.delete(`http://localhost:5000/api/mototype/${moto_type_id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+      });
+      setTypes(types.filter(type => type.moto_type_id !== moto_type_id));
+      Swal.fire('สำเร็จ', 'ลบข้อมูลสำเร็จ', 'success');
+    } catch (err) {
+      const msg = err?.response?.data?.message;
+      Swal.fire('ลบไม่สำเร็จ', msg || 'เกิดข้อผิดพลาดที่ server', 'error');
     }
-  };
+  }
+};
   
 
   const filtered = types.filter(
@@ -79,7 +79,7 @@ export default function BikeTypeEdit() {
               <Link to={'/BikeTypeAdd'}><button>เพิ่ม +</button></Link>
             </div>
             {filtered.map(type =>
-              <BikeTypeBox key={type.id} type={type} onDelete={handleDelete} />
+              <BikeTypeBox key={type.moto_type_id} type={type} onDelete={handleDelete} />
             )}
           </div>
         </div>

@@ -23,7 +23,7 @@ export default function AdminPage() {
 
   // ฟิลเตอร์ค้นหาชื่อ
   const filtered = admins.filter((admin) =>
-    admin.username.toLowerCase().includes(search.toLowerCase())
+    admin.username?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -46,11 +46,10 @@ export default function AdminPage() {
             />
           </div>
           {filtered.map((admin) => (
-            <AdminInfoBox key={admin.id} admin={admin} />
+            <AdminInfoBox key={admin.user_id} admin={admin} />
           ))}
         </div>
       </section>
     </>
   );
 }
-

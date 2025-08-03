@@ -79,16 +79,18 @@ exports.register = async (req, res) => {
       }
   
       const payload = {
-        id: user.id,
+        user_id: user.user_id,
         email: user.email,
         username: user.username,
         role: user.role
-      }
+      };
   
       jwt.sign(payload, process.env.SECRET, { expiresIn: '1d' }, (err, token) => {
         if (err) return res.status(500).json({ message: 'Token Error' })
         res.json({ payload, token })
       })
+      // console.log("JWT SECRET:", process.env.SECRET);
+
     } catch (err) {
       console.log(err)
       res.status(500).json({ message: 'Server Error' })
@@ -99,13 +101,12 @@ exports.register = async (req, res) => {
   exports.currentUser = async (req, res) => {
     try {
       const user = await prisma.user.findUnique({
-        where: { id: req.user.id },
+        where: { user_id: req.user.user_id },
         select: {
-          id: true,
+          user_id: true,
           email: true,
           username: true,
-          role: true,
-          
+          role: true, 
         }
       });
       res.json(user);

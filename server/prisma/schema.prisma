@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -14,69 +13,77 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id         Int                @id @default(autoincrement())
-  username   String             @unique
-  email      String             @unique
-  password   String?
-  firstName  String?
-  lastName   String?
-  picture    String?
-  role       String             @default("user")
-  enable     Boolean            @default(true)
-  address    String?
-  gender     String?
-  birthDate  DateTime?
-  occupation String?
-  phone      String?
-  createdAt  DateTime           @default(now())
-  updatedAt  DateTime           @updatedAt
-  histories  RecommendHistory[]
-  message    Message[]
+model user {
+  user_id          Int                @id @default(autoincrement())
+  username         String             @unique(map: "User_username_key")
+  email            String             @unique(map: "User_email_key")
+  password         String?
+  firstName        String?
+  lastName         String?
+  picture          String?
+  role             String             @default("user")
+  enable           Boolean            @default(true)
+  address          String?
+  gender           String?
+  birthDate        DateTime?
+  occupation       String?
+  phone            String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  message          message[]
+  recommendhistory recommendhistory[]
 }
 
-model MotoType {
-  id             Int          @id @default(autoincrement())
-  moto_type_name String       @db.VarChar(45)
-  picture        String?
-  motorcycles    Motorcycle[]
+model message {
+  message_id Int      @id @default(autoincrement())
+  name       String
+  email      String
+  tel        String?
+  content    String
+  createdAt  DateTime @default(now())
+  user_id    Int?
+  user       user?    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_message_user")
+
+  @@index([user_id], map: "Message_userId_fkey")
 }
 
-model Motorcycle {
-  id               Int      @id @default(autoincrement())
+model motorcycle {
+  motorcycle_id    Int      @id @default(autoincrement())
   moto_name        String   @db.VarChar(45)
   moto_brand       String   @db.VarChar(30)
-  picture          String?
   moto_weight      Float    @db.Float
-  moto_cc          Int      @db.Int
-  maintenance_cost Int      @db.Int
+  moto_cc          Int
+  maintenance_cost Int
   consumption_rate Float    @db.Float
-  fuel_size        Float?
-  moto_price       Int      @db.Int
   moto_content     String   @db.Text
+  moto_price       Int
   moto_view        Int?
   moto_type_id     Int
-  moto_type        MotoType @relation(fields: [moto_type_id], references: [id])
+  picture          String?
+  fuel_size        Float?
+  mototype         mototype @relation(fields: [moto_type_id], references: [moto_type_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_motorcycle_mototype")
+
+  @@index([moto_type_id], map: "Motorcycle_moto_type_id_fkey")
 }
 
-model RecommendHistory {
-  id           Int      @id @default(autoincrement())
-  userId       Int
+model mototype {
+  moto_type_id   Int          @id @default(autoincrement())
+  moto_type_name String       @db.VarChar(45)
+  picture        String?
+  motorcycle     motorcycle[]
+}
+
+model recommendhistory {
+  history_id   Int      @id @default(autoincrement())
+  user_id      Int?
   selectedType Int?
   priority     String
   criteria     String
-  result       String
+  result       String   @db.LongText
   createdAt    DateTime @default(now())
-  user         User     @relation(fields: [userId], references: [id])
+  user         user?    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_recommend_user")
+
+  @@index([user_id], map: "RecommendHistory_userId_fkey")
 }
 
-model Message {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  tel       String?
-  content   String 
-  createdAt DateTime @default(now())
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-}
+

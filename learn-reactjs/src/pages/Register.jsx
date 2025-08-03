@@ -18,7 +18,8 @@ export default function Register() {
     phone: '',
     address: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    job: ''
   })
 
   const handleChange = (e) => {

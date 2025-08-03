@@ -20,22 +20,27 @@ export default function AdminUserPage() {
     .catch(() => toast.error("ดึงข้อมูลผู้ใช้ไม่สำเร็จ"));
   }, []);
 
-
   const handleDelete = async (id) => {
-    if(window.confirm("ยืนยันลบผู้ใช้นี้?")) {
-      await axios.delete(`http://localhost:5000/api/user/${id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
-      });
-      setUsers(users.filter(u => u.id !== id));
-      toast.success("ลบผู้ใช้สำเร็จ");
+    if (window.confirm("ยืนยันลบผู้ใช้นี้?")) {
+      try {
+        await axios.delete(`http://localhost:5000/api/user/${id}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        });
+        setUsers(users.filter(u => u.user_id !== id));
+        toast.success("ลบผู้ใช้สำเร็จ");
+      } catch (err) {
+        toast.error("ลบผู้ใช้ไม่สำเร็จ");
+      }
     }
   };
 
-  const filteredUsers = users.filter(u => u.username.toLowerCase().includes(search.toLowerCase()));
+  const filteredUsers = users.filter(u =>
+    u.username?.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Sidebar />
       <section className='section-user-page'>
         <div className='user-edit-box'>
@@ -53,11 +58,14 @@ export default function AdminUserPage() {
             />
           </div>
           {filteredUsers.map(user =>
-            <AdminUserInfoBox key={user.id} user={user} onDelete={handleDelete} />
+            <AdminUserInfoBox
+              key={user.user_id}
+              user={user}
+              onDelete={handleDelete}
+            />
           )}
         </div>
       </section>
     </>
-  )
+  );
 }
-

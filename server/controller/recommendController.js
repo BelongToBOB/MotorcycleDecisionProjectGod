@@ -59,7 +59,7 @@ exports.recommend = async (req, res) => {
     // --- Query
     const bikes = await prisma.motorcycle.findMany({
       where,
-      include: { moto_type: true }
+      include: { mototype: true }
     });
     if (!bikes.length) return res.json([]);
 

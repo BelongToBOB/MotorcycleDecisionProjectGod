@@ -16,11 +16,10 @@ export default function AdminUserInfoBox({ user, onDelete }) {
             </div>
         </div>
         <div className='edit-part'>
-            <Link to={`/UserEdit/${user.id}`}><button className='edit-btn'>แก้ไข</button></Link>
-            <button className='delete-btn' onClick={() => onDelete(user.id)}>ลบ</button>
-            <span>user_id: {user.id}</span>
+            <Link to={`/UserEdit/${user.user_id}`}><button className='edit-btn'>แก้ไข</button></Link>
+            <button className='delete-btn' onClick={() => onDelete(user.user_id)}>ลบ</button>
+            <span>user_id: {user.user_id}</span>
         </div>
     </div>
   )
 }
-

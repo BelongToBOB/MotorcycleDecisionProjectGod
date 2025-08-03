@@ -21,10 +21,10 @@ export default function BikeListBox({ bike, onDelete }) {
         </div>
       </div>
       <div className='edit-part'>
-        <Link to={`/BikeListEdit/${bike.id}`}>
+        <Link to={`/BikeListEdit/${bike.motorcycle_id}`}>
           <button className='edit-btn-bikeList'>แก้ไข</button>
         </Link>
-        <button className='delete-btn-bikeList' onClick={() => onDelete(bike.id)}>
+        <button className='delete-btn-bikeList' onClick={() => onDelete(bike.motorcycle_id)}>
           ลบ
         </button>
       </div>

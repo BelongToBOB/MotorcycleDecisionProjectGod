@@ -45,6 +45,7 @@ export default function BikeListEdit() {
         fuel_size: d.fuel_size || ""
       });
     }).catch(() => toast.error("โหลดข้อมูลไม่สำเร็จ"));
+
     // โหลดประเภท
     axios.get("http://localhost:5000/api/mototype", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -57,6 +58,7 @@ export default function BikeListEdit() {
   const handleSubmit = async e => {
     e.preventDefault();
     if (!form.moto_name || !form.moto_type_id) return toast.error("กรอกข้อมูลให้ครบ");
+
     try {
       await axios.put(`http://localhost:5000/api/motorcycle/${id}`, form, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -75,7 +77,7 @@ export default function BikeListEdit() {
       <section className='section-admin-page-edit'>
         <div className='admin-edit-box-edit'>
           <div className='admin-tag-edit'><h2>แก้ไขข้อมูลรถจักรยานยนต์</h2></div>
-          <form className="my-form-bg" onSubmit={handleSubmit} >
+          <form className="my-form-bg" onSubmit={handleSubmit}>
             <div className='admin-info-box'>
               <div className='admin-info-grid-bike-list-add'>
                 <div className='admin-img-upload'>
@@ -92,47 +94,49 @@ export default function BikeListEdit() {
                   >
                     <option value="">--เลือกประเภท--</option>
                     {types.map(t => (
-                      <option key={t.id} value={t.id}>{t.moto_type_name}</option>
+                      <option key={t.moto_type_id} value={t.moto_type_id}>
+                        {t.moto_type_name}
+                      </option>
                     ))}
                   </select>
                 </div>
                 <div className='edit-bike-column'>
-                    <div className='bike-brand'>
+                  <div className='bike-brand'>
                     <h3>ยี่ห้อ</h3>
                     <input name="moto_brand" className='bike-brand-input' value={form.moto_brand} onChange={handleChange} />
-                    </div>
-                    <div className='bike-name-input'>
+                  </div>
+                  <div className='bike-name-input'>
                     <h3>ชื่อรถจักรยานยนต์</h3>
                     <input name="moto_name" className='bike-name-input' value={form.moto_name} onChange={handleChange} />
-                    </div>
-                    <div className='bike-manter'>
+                  </div>
+                  <div className='bike-manter'>
                     <h3>ค่าบำรุงรักษาปีแรก</h3>
                     <input name="maintenance_cost" className='bike-manter-input' value={form.maintenance_cost} onChange={handleChange} />
-                    </div>
-                    <div className='bike-kml'>
+                  </div>
+                  <div className='bike-kml'>
                     <h3>อัตราสิ้นเปลือง</h3>
                     <input name="consumption_rate" className='bike-kml-input' value={form.consumption_rate} onChange={handleChange} />
-                    </div>
-                    <div className='bike-weight'>
+                  </div>
+                  <div className='bike-weight'>
                     <h3>น้ำหนัก</h3>
                     <input name="moto_weight" className='bike-weight-input' value={form.moto_weight} onChange={handleChange} />
-                    </div>
-                    <div className='bike-cc'>
+                  </div>
+                  <div className='bike-cc'>
                     <h3>cc</h3>
                     <input name="moto_cc" className='bike-cc-input' value={form.moto_cc} onChange={handleChange} />
-                    </div>
-                    <div className='bike-fuel-size'>
+                  </div>
+                  <div className='bike-fuel-size'>
                     <h3>ขนาดถังน้ำมัน (ลิตร)</h3>
                     <input name="fuel_size" className='bike-fuel-size-input' value={form.fuel_size} onChange={handleChange} />
-                    </div>
-                    <div className='bike-price'>
+                  </div>
+                  <div className='bike-price'>
                     <h3>ราคา</h3>
                     <input name="moto_price" className='bike-price-input' value={form.moto_price} onChange={handleChange} />
-                    </div>
-                    <div className='bike-moreInfo'>
+                  </div>
+                  <div className='bike-moreInfo'>
                     <h3>รายละเอียด</h3>
                     <textarea name="moto_content" className='bike-moreInfo-input' value={form.moto_content} onChange={handleChange} />
-                    </div>
+                  </div>
                 </div>
               </div>
               <div className='btn-area'>

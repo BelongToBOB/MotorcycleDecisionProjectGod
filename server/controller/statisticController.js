@@ -2,8 +2,8 @@ const prisma = require('../config/prisma');
 
 exports.overview = async (req, res) => {
   try {
-    const histories = await prisma.recommendHistory.findMany({});
-    const types = await prisma.motoType.findMany();
+    const histories = await prisma.recommendhistory.findMany({});
+    const types = await prisma.mototype.findMany();
     const typeMap = {};
     types.forEach(t => typeMap[t.id] = t.moto_type_name);
 

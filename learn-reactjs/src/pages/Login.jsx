@@ -31,10 +31,13 @@ export default function Login() {
         password: form.password,
       });
 
+      // console.log("Login Response:", res.data);
+
       const { token, payload } = res.data;
 
       localStorage.setItem("token", token);
-      setToken(token);       // บันทึกลง store
+      setToken(token);  
+      // console.log("Token ที่ถูกบันทึก:", token);     
       setUser(payload);      // บันทึกข้อมูลผู้ใช้
       toast.success("เข้าสู่ระบบสำเร็จ");
 

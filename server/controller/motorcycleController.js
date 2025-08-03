@@ -18,7 +18,7 @@ function toNumberFields(data) {
 exports.list = async (req, res) => {
   try {
     const motorcycles = await prisma.motorcycle.findMany({
-      include: { moto_type: true }  
+      include: { mototype: true } 
     });
     res.json(motorcycles);
   } catch (err) {
@@ -31,8 +31,8 @@ exports.list = async (req, res) => {
 exports.get = async (req, res) => {
   try {
     const mc = await prisma.motorcycle.findUnique({
-      where: { id: Number(req.params.id) },
-      include: { moto_type: true }
+      where: { motorcycle_id: Number(req.params.id) }, 
+      include: { mototype: true } // ✅
     });
     if (!mc) return res.status(404).json({ message: 'ไม่พบข้อมูล' });
     res.json(mc);
@@ -61,11 +61,10 @@ exports.create = async (req, res) => {
 // PUT /api/motorcycle/:id
 exports.update = async (req, res) => {
   try {
-    
     let data = toNumberFields(req.body);
 
     const mc = await prisma.motorcycle.update({
-      where: { id: Number(req.params.id) },
+      where: { motorcycle_id: Number(req.params.id) }, 
       data
     });
     res.json(mc);
@@ -79,7 +78,7 @@ exports.update = async (req, res) => {
 exports.remove = async (req, res) => {
   try {
     await prisma.motorcycle.delete({
-      where: { id: Number(req.params.id) }
+      where: { motorcycle_id: Number(req.params.id) } 
     });
     res.json({ message: 'Delete Success' });
   } catch (err) {
@@ -91,5 +90,4 @@ exports.remove = async (req, res) => {
       res.status(500).json({ message: 'Server Error', error: err });
     }
   }
-}
-
+};

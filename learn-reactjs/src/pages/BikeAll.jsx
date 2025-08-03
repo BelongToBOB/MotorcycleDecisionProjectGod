@@ -66,7 +66,7 @@ export default function BikeAll() {
                 {filteredBikes
                   .filter((b) => b.moto_brand === brand)
                   .map((bike) => (
-                    <BikeCard key={bike.id} bike={bike} onDetail={() => setSelectedBike(bike)} />
+                    <BikeCard key={bike.motorcycle_id} bike={bike} onDetail={() => setSelectedBike(bike)} />
                   ))}
               </div>
             </div>

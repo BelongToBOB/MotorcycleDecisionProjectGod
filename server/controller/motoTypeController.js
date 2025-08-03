@@ -3,7 +3,7 @@ const prisma = require('../config/prisma');
 // GET /api/mototype 
 exports.list = async (req, res) => {
   try {
-    const types = await prisma.motoType.findMany();
+    const types = await prisma.mototype.findMany();
     res.json(types);
   } catch (err) {
     res.status(500).json({ message: 'Server Error' });
@@ -13,12 +13,13 @@ exports.list = async (req, res) => {
 // GET /api/mototype/:id 
 exports.get = async (req, res) => {
   try {
-    const type = await prisma.motoType.findUnique({
-      where: { id: Number(req.params.id) }
+    const type = await prisma.mototype.findUnique({
+      where: { moto_type_id : Number(req.params.id) }
     });
     if (!type) return res.status(404).json({ message: 'ไม่พบข้อมูล' });
     res.json(type);
   } catch (err) {
+    console.log(err)
     res.status(500).json({ message: 'Server Error' });
   }
 };
@@ -29,7 +30,7 @@ exports.create = async (req, res) => {
     const { moto_type_name, picture } = req.body;
     if (!moto_type_name) return res.status(400).json({ message: 'กรุณาระบุชื่อประเภท' });
 
-    const newType = await prisma.motoType.create({
+    const newType = await prisma.mototype.create({
       data: { moto_type_name, picture }
     });
     res.json(newType);
@@ -44,8 +45,8 @@ exports.update = async (req, res) => {
     const { moto_type_name, picture } = req.body;
     if (!moto_type_name) return res.status(400).json({ message: 'กรุณาระบุชื่อประเภท' });
 
-    const updated = await prisma.motoType.update({
-      where: { id: Number(req.params.id) },
+    const updated = await prisma.mototype.update({
+      where: { moto_type_id : Number(req.params.id) },
       data: { moto_type_name, picture }
     });
     res.json(updated);
@@ -57,8 +58,8 @@ exports.update = async (req, res) => {
 // DELETE /api/mototype/:id 
 exports.remove = async (req, res) => {
   try {
-    await prisma.motoType.delete({
-      where: { id: Number(req.params.id) }
+    await prisma.mototype.delete({
+      where: { moto_type_id : Number(req.params.id) }
     });
     res.json({ message: 'Delete Success' });
   } catch (err) {

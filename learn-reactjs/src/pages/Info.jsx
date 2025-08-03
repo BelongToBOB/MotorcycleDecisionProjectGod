@@ -121,10 +121,10 @@ export default function Info() {
               ) : Array.isArray(typeOptions) && typeOptions.length > 0 ? (
                 typeOptions.map((type) => (
                   <div
-                    key={type.id}
+                    key={type.moto_type_id}
                     className="type-choice"
                     style={{ cursor: 'pointer', textAlign: 'center', margin: "0 15px" }}
-                    onClick={() => handleTypeSelect(type.id)}
+                    onClick={() => handleTypeSelect(type.moto_type_id)}
                     tabIndex={0}
                     title={type.moto_type_name}
                   >

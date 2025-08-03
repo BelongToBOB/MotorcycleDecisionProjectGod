@@ -11,15 +11,15 @@ export default function BikeTypeBox({ type, onDelete }) {
           <img src={type.picture || "/default-bike-type.png"} alt="" />
         </div>
         <div className='info-admin'>
-          <p>รหัสประเภท: {type.id}</p>
+          <p>รหัสประเภท: {type.moto_type_id}</p>
           <p>ชื่อประเภท: {type.moto_type_name}</p>
         </div>
       </div>
       <div className='edit-part'>
-        <Link to={`/BikeTypeModify/${type.id}`}>
+        <Link to={`/BikeTypeModify/${type.moto_type_id}`}>
           <button className='edit-btn'>แก้ไข</button>
         </Link>
-        <button className='delete-btn' onClick={() => onDelete(type.id)}>ลบ</button>
+        <button className='delete-btn' onClick={() => onDelete(type.moto_type_id)}>ลบ</button>
       </div>
     </div>
   )

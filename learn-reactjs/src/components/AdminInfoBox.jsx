@@ -19,11 +19,11 @@ export default function AdminInfoBox({ admin, onDelete }) {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:5000/api/admin/${admin.id}`, {
+        await axios.delete(`http://localhost:5000/api/admin/${admin.user_id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
         });
         Swal.fire("ลบสำเร็จ!", "ข้อมูลแอดมินถูกลบแล้ว", "success");
-        if (onDelete) onDelete(admin.id); // แจ้ง parent ให้ลบออกจาก list
+        if (onDelete) onDelete(admin.user_id); // ✅ เปลี่ยน id ที่ส่งกลับ
       } catch (err) {
         Swal.fire("เกิดข้อผิดพลาด", "ไม่สามารถลบแอดมินได้", "error");
       }
@@ -43,15 +43,14 @@ export default function AdminInfoBox({ admin, onDelete }) {
         </div>
       </div>
       <div className="edit-part">
-        <Link to={`/AdminEdit/${admin.id}`}>
+        <Link to={`/AdminEdit/${admin.user_id}`}>
           <button className="edit-btn">แก้ไข</button>
         </Link>
         <button className="delete-btn" onClick={handleDelete}>
           ลบ
         </button>
-        <span>admin_id: {admin.id}</span>
+        <span>admin_id: {admin.user_id}</span>
       </div>
     </div>
   );
 }
-

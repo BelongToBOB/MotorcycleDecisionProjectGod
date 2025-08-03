@@ -60,7 +60,7 @@ export default function BikeTypeModify() {
                   <h3>รูปภาพประเภท</h3>
                   <ImageUploader
                     value={form.picture}
-                    onUpload={handleImageChange} // ตรงนี้สำคัญ!
+                    onUpload={handleImageChange} 
                     className="preview-img"
                   />
                 </div>

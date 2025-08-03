@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import BikeListBox from "../components/BikeListBox";
 import axios from "axios";
 import { toast } from "react-toastify";
-import '../style/BikeList.css';
 import Swal from "sweetalert2";
+import '../style/BikeList.css';
 
 export default function BikeList() {
   const [bikes, setBikes] = useState([]);
@@ -45,22 +45,20 @@ export default function BikeList() {
       confirmButtonColor: "#e74c3c",
       cancelButtonColor: "#3085d6"
     });
-  
+
     if (result.isConfirmed) {
       try {
         await axios.delete(`http://localhost:5000/api/motorcycle/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
-        setBikes(bikes.filter((bike) => bike.id !== id));
+        setBikes(bikes.filter((bike) => bike.motorcycle_id !== id));
         Swal.fire("ลบข้อมูลสำเร็จ", "", "success");
       } catch (err) {
-        const msg =
-          err?.response?.data?.message || "เกิดข้อผิดพลาดที่ server";
+        const msg = err?.response?.data?.message || "เกิดข้อผิดพลาดที่ server";
         Swal.fire("ลบไม่สำเร็จ", msg, "error");
       }
     }
   };
-  
 
   const filteredBikes = bikes
     .filter((bike) => !selectedType || bike.moto_type_id === Number(selectedType))
@@ -96,7 +94,7 @@ export default function BikeList() {
           >
             <option value="">ทุกประเภท</option>
             {types.map((type) => (
-              <option value={type.id} key={type.id}>
+              <option value={type.moto_type_id} key={type.moto_type_id}>
                 {type.moto_type_name}
               </option>
             ))}
@@ -109,10 +107,12 @@ export default function BikeList() {
               </Link>
             </div>
             {filteredBikes.length === 0 ? (
-              <div style={{ marginTop: 24, textAlign: "center", color: "#888" }}>ไม่พบข้อมูล</div>
+              <div style={{ marginTop: 24, textAlign: "center", color: "#888" }}>
+                ไม่พบข้อมูล
+              </div>
             ) : (
               filteredBikes.map((bike) => (
-                <BikeListBox key={bike.id} bike={bike} onDelete={handleDelete} />
+                <BikeListBox key={bike.motorcycle_id} bike={bike} onDelete={handleDelete} />
               ))
             )}
           </div>

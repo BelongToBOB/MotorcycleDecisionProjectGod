@@ -30,31 +30,42 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* General */}
         <Route path="/" element={<Home />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/Info" element={<Info />} />
+        <Route path="/Contact" element={<Contact />} />
+
+        {/* Choose Bike */}
         <Route path="/Bikestyle" element={<BikeStyle />} />
         <Route path="/Prioritize" element={<Prioritize />} />
         <Route path="/Criterion" element={<Criterion />} />
         <Route path="/Result" element={<Result />} />
-        <Route path="/Info" element={<Info />} />
-        <Route path="/Contact" element={<Contact />} />
+        <Route path="/BikeAll" element={<BikeAll />} />
+        <Route path="/BikeCard" element={<BikeCard />} />
+
+        {/* User profile */}
+        <Route path="/ProfileUser" element={<ProfileUser />} />
+        <Route path="/UserEdit/:id" element={<UserEdit />} />
+
+        {/* Admin */}
         <Route path="/AdminBo" element={<AdminBo />} />
         <Route path="/AdminPage" element={<AdminPage />} />
         <Route path="/AdminUserPage" element={<AdminUserPage />} />
-        <Route path="/AdminEdit/:id" element={<AdminEdit />} />
-        <Route path="/UserEdit/:id" element={<UserEdit />} />
-        <Route path="/BikeTypeEdit/" element={<BikeTypeEdit />} />
+        <Route path="/AdminEdit/:user_id" element={<AdminEdit />} />
+        <Route path="/AdminMessage" element={<AdminMessage />} />
+        <Route path="/Statistic" element={<Statistic />} />
+
+        {/* Type of Bike */}
+        <Route path="/BikeTypeEdit" element={<BikeTypeEdit />} />
         <Route path="/BikeTypeAdd" element={<BikeTypeAdd />} />
         <Route path="/BikeTypeModify/:id" element={<BikeTypeModify />} />
+
+        {/* List of Bike */}
         <Route path="/BikeList" element={<BikeList />} />
         <Route path="/BikeListAdd" element={<BikeListAdd />} />
         <Route path="/BikeListEdit/:id" element={<BikeListEdit />} />
-        <Route path="/BikeAll" element={<BikeAll />} />
-        <Route path="/BikeCard" element={<BikeCard />} />
-        <Route path="/ProfileUser" element={<ProfileUser />} />
-        <Route path="/Statistic" element={<Statistic />} />
-        <Route path="/AdminMessage" element={<AdminMessage />} />
       </Routes>
     </BrowserRouter>
   )

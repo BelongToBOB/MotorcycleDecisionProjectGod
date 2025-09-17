@@ -4,11 +4,10 @@ import Sidebar from "../components/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import BikeListBox from "../components/BikeListBox";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import '../style/BikeList.css';
+import "../style/BikeList.css";
 
 export default function BikeList() {
   const [bikes, setBikes] = useState([]);
@@ -43,7 +42,7 @@ export default function BikeList() {
       confirmButtonText: "ลบ",
       cancelButtonText: "ยกเลิก",
       confirmButtonColor: "#e74c3c",
-      cancelButtonColor: "#3085d6"
+      cancelButtonColor: "#3085d6",
     });
 
     if (result.isConfirmed) {
@@ -61,10 +60,14 @@ export default function BikeList() {
   };
 
   const filteredBikes = bikes
-    .filter((bike) => !selectedType || bike.moto_type_id === Number(selectedType))
-    .filter((bike) =>
-      bike.moto_name.toLowerCase().includes(search.toLowerCase()) ||
-      bike.moto_brand.toLowerCase().includes(search.toLowerCase())
+    .filter(
+      (bike) =>
+        !selectedType || bike.moto_type_id === Number(selectedType)
+    )
+    .filter(
+      (bike) =>
+        bike.moto_name.toLowerCase().includes(search.toLowerCase()) ||
+        bike.moto_brand.toLowerCase().includes(search.toLowerCase())
     );
 
   return (
@@ -76,45 +79,92 @@ export default function BikeList() {
           <div className="admin-tag">
             <h2>ข้อมูลรายการรถจักรยานยนต์</h2>
           </div>
-          <div className="search-box">
-            <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
-            <input
-              type="text"
-              placeholder="ค้นหาชื่อ/ยี่ห้อ"
-              className="search-input"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <br />
-          <select
-            className="select-type"
-            value={selectedType}
-            onChange={(e) => setSelectedType(e.target.value)}
-          >
-            <option value="">ทุกประเภท</option>
-            {types.map((type) => (
-              <option value={type.moto_type_id} key={type.moto_type_id}>
-                {type.moto_type_name}
-              </option>
-            ))}
-          </select>
 
-          <div className="BikeTypeBox-main">
-            <div className="add-btn">
-              <Link to={"/BikeListAdd"}>
-                <button>เพิ่ม +</button>
-              </Link>
+          {/* Search + Filter */}
+          <div className="search-bar">
+            <div className="search-box">
+              
+              <input
+                type="text"
+                placeholder="ค้นหาชื่อ/ยี่ห้อ"
+                className="search-input"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
-            {filteredBikes.length === 0 ? (
-              <div style={{ marginTop: 24, textAlign: "center", color: "#888" }}>
-                ไม่พบข้อมูล
-              </div>
-            ) : (
-              filteredBikes.map((bike) => (
-                <BikeListBox key={bike.motorcycle_id} bike={bike} onDelete={handleDelete} />
-              ))
-            )}
+            <select
+              className="select-type"
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+            >
+              <option value="">ทุกประเภท</option>
+              {types.map((type) => (
+                <option value={type.moto_type_id} key={type.moto_type_id}>
+                  {type.moto_type_name}
+                </option>
+              ))}
+            </select>
+            <Link to={"/BikeListAdd"}>
+              <button className="add-btn">+ เพิ่ม</button>
+            </Link>
+          </div>
+
+          {/* Table */}
+          <div className="table-container">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>รูป</th>
+                  <th>ชื่อรถ</th>
+                  <th>ยี่ห้อ</th>
+                  <th>CC</th>
+                  <th>น้ำหนัก</th>
+                  <th>ค่าบำรุงรักษา</th>
+                  <th>สิ้นเปลือง (กม./ลิตร)</th>
+                  <th>ราคา</th>
+                  <th>การจัดการ</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredBikes.length === 0 ? (
+                  <tr>
+                    <td colSpan="9" className="no-data">
+                      ไม่พบข้อมูล
+                    </td>
+                  </tr>
+                ) : (
+                  filteredBikes.map((bike) => (
+                    <tr key={bike.motorcycle_id}>
+                      <td>
+                        <img
+                          src={bike.picture || "/default-bike.png"}
+                          alt={bike.moto_name}
+                          className="table-avatar"
+                        />
+                      </td>
+                      <td>{bike.moto_name}</td>
+                      <td>{bike.moto_brand}</td>
+                      <td>{bike.moto_cc}</td>
+                      <td>{bike.moto_weight}</td>
+                      <td>{bike.maintenance_cost?.toLocaleString()}</td>
+                      <td>{bike.consumption_rate}</td>
+                      <td>{bike.moto_price?.toLocaleString()}</td>
+                      <td>
+                        <Link to={`/BikeListEdit/${bike.motorcycle_id}`}>
+                          <button className="edit-btn">แก้ไข</button>
+                        </Link>
+                        <button
+                          className="delete-btn"
+                          onClick={() => handleDelete(bike.motorcycle_id)}
+                        >
+                          ลบ
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>

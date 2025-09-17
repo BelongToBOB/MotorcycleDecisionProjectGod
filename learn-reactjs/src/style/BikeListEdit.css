@@ -1,10 +1,136 @@
-.my-form-bg {
-    background-color: #d3d3d3;
-    border-radius: 10px;
-    padding: 1rem;
+.section-admin-page-edit {
+  background: #f7fafd;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
 }
 
-.edit-bike-column{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.admin-edit-box-edit {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 1100px;
+  padding: 32px;
+}
+
+.admin-tag-edit {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.admin-tag-edit h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.my-form-bg {
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.admin-info-grid-bike-list-add {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.admin-img-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bike-type,
+.bike-brand,
+.bike-name-input,
+.bike-manter,
+.bike-kml,
+.bike-weight,
+.bike-cc,
+.bike-fuel-size,
+.bike-price,
+.bike-moreInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-info-box h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  margin: 0;
+}
+
+.admin-info-box input,
+.admin-info-box select,
+.admin-info-box textarea {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  transition: border 0.2s;
+}
+
+.admin-info-box input:focus,
+.admin-info-box select:focus,
+.admin-info-box textarea:focus {
+  border-color: #1e90ff;
+  outline: none;
+}
+
+.edit-bike-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.bike-moreInfo {
+  grid-column: 1 / -1;
+}
+
+.bike-moreInfo textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.btn-area {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.cancel-btn,
+.confirm-btn2 {
+  padding: 10px 24px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.cancel-btn {
+  background: #ccc;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background: #b3b3b3;
+}
+
+.confirm-btn2 {
+  background: #1e90ff;
+  color: #fff;
+}
+
+.confirm-btn2:hover {
+  background: #0f6cd6;
 }

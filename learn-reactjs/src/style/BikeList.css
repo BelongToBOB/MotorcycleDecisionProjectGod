@@ -1,109 +1,133 @@
 .section-admin-page {
-    background-image: url("../images/suzukiblur.png");
-    background-size: cover;
-    min-height: 100vh;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
+  background: #f7fafd;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
 }
 
 .admin-edit-box {
-    max-width: 1000px;
-    width: 100%;
-    padding: 2rem;
-    margin-top: 1rem;
-    background-color: #ffffff;
-    border-radius: 10px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 1200px;
+  padding: 32px;
 }
 
 .admin-tag {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    margin-bottom: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .admin-tag h2 {
-    font-size: 30px;
-    font-weight: 300;
-    text-shadow: 0px 0px 1px rgb(0, 0, 0);
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
 }
 
-.search-info {
-    display: flex;
-    justify-content: baseline;
-    max-width: 400px;
-    width: 90%;
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .search-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 300px;
-    margin-top: 1rem;
-  }
-  
-  .search-icon {
-    position: absolute;
-    left: 10px;
-    color: rgb(0, 0, 0);
-  }
-  
-  .search-input {
-    width: 100%;
-    padding: 10px 10px 10px 35px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-  }
-
-.BikeTypeBox-main {
-    background-color: #ececec;
-    padding: 1rem;
-    margin-top: 1rem;
-    border-radius: 10px;
+  position: relative;
+  flex: 1;
 }
 
-.add-btn {
-    display: flex;
-    justify-content: end;
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
 }
 
-.add-btn button {
-    padding: 5px;
-    border: none;
-    border-radius: 10px;
-    background-color: #61FF51;
-    cursor: pointer;
-    width: 80px;
-}
-
-.type-bike {
-    display: flex;
-    justify-content: center;
-    align-items: center;  
-}
-
-.type-bike h2 {
-    font-size: 25px;
-    font-weight: 400;
+.search-input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
 }
 
 .select-type {
-    padding: 7px 18px;
-    border: 1.5px solid #bbb;
-    border-radius: 7px;
-    background: #fff;
-    font-size: 1rem;
-    margin-right: 12px;
-    min-width: 170px;
-    transition: border 0.2s;
-    outline: none;
-    box-shadow: 1px 2px 6px 0 rgba(0,0,0,0.03);
-  }
-  
-  
-  
-  
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background: #fff;
+}
+
+.add-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #1e90ff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.add-btn:hover {
+  background: #0f6cd6;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.admin-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.table-avatar {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  margin: 2px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: #ffc107;
+  color: #333;
+}
+
+.delete-btn {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.no-data {
+  text-align: center;
+  padding: 20px 0;
+  color: #888;
+}

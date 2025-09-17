@@ -6,7 +6,6 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ImageUploader from "../components/ImageUploader";
-import dropDown from '../images/dropdown.png';
 
 export default function UserEdit() {
   const { id } = useParams();
@@ -39,7 +38,7 @@ export default function UserEdit() {
           lastName: res.data.lastName || "",
           email: res.data.email || "",
           gender: res.data.gender || "",
-          birthDate: res.data.birthDate ? res.data.birthDate.split('T')[0] : "",
+          birthDate: res.data.birthDate ? res.data.birthDate.split("T")[0] : "",
           phone: res.data.phone || "",
           occupation: res.data.occupation || "",
           address: res.data.address || "",
@@ -59,8 +58,6 @@ export default function UserEdit() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleGender = (gender) => setForm({ ...form, gender });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.password !== form.confirmPassword) {
@@ -71,13 +68,9 @@ export default function UserEdit() {
       if (!form.password) delete updateBody.password;
       delete updateBody.confirmPassword;
 
-      await axios.put(
-        `http://localhost:5000/api/user/${id}`,
-        updateBody,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
+      await axios.put(`http://localhost:5000/api/user/${id}`, updateBody, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
       toast.success("อัปเดตข้อมูลสำเร็จ");
       navigate("/AdminUserPage");
     } catch (err) {
@@ -89,87 +82,92 @@ export default function UserEdit() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Sidebar />
-      <section className='section-admin-page-edit'>
-        <div className='admin-edit-box-edit'>
-          <div className='admin-tag-edit'>
-            <h2>แก้ไขข้อมูลผู้ใช้</h2>
-          </div>
-          <form className='admin-info-edit' onSubmit={handleSubmit}>
-            <div className='admin-img-upload'>
-              <div className='admin-img'>
-                <img src={form.picture || "/default-profile.png"} alt="" />
-              </div>
-              <ImageUploader onUpload={url => setForm({ ...form, picture: url })} />
+      <section className="section-admin-page-edit">
+        <div className="admin-edit-box-edit">
+          <h2 className="admin-tag-edit">แก้ไขข้อมูลผู้ใช้</h2>
+          <form className="admin-info-edit" onSubmit={handleSubmit}>
+            {/* รูปโปรไฟล์ */}
+            <div className="admin-img-upload">
+              <img
+                src={form.picture || "/default-profile.png"}
+                alt="profile"
+                className="profile-preview"
+              />
+              <ImageUploader onUpload={(url) => setForm({ ...form, picture: url })} />
             </div>
-            <div className='admin-info-box'>
-              <div className='admin-info-grid'>
-                <div className='admin-id'>
-                  <h3>รหัสผู้ใช้</h3>
-                  <input type="text" className='admin-id-input' value={id} disabled />
-                </div>
-                <div className='admin-name'>
-                  <h3>ชื่อผู้ใช้</h3>
-                  <input type="text" className='admin-name-input' name="username" value={form.username} onChange={handleChange} />
-                </div>
-                <div className='admin-name'>
-                  <h3>ชื่อจริง</h3>
-                  <input type="text" className='admin-name-input' name="firstName" value={form.firstName} onChange={handleChange} />
-                </div>
-                <div className='admin-name'>
-                  <h3>นามสกุล</h3>
-                  <input type="text" className='admin-name-input' name="lastName" value={form.lastName} onChange={handleChange} />
-                </div>
-                <div className='admin-email'>
-                  <h3>Email</h3>
-                  <input type="text" className='admin-email-input' name="email" value={form.email} onChange={handleChange} />
-                </div>
-                <div className="dropdown-user-edit">
-                  <h3>เพศ</h3>
-                  <button type="button" className="dropbtn-user-edit">
-                    {form.gender ? (form.gender === "male" ? "ชาย" : "หญิง") : "เลือกเพศ"}
-                    <img className='dropDown-icon' src={dropDown} alt="dropDown" />
-                  </button>
-                  <div className="dropdown-content-user-edit">
-                    <a href="#" onClick={() => handleGender("male")}>ชาย</a>
-                    <a href="#" onClick={() => handleGender("female")}>หญิง</a>
-                  </div>
-                </div>
-                <div className='date-user-edit'>
-                  <h3>วัน/เดือน/ปี เกิด</h3>
-                  <input type="date" name="birthDate" value={form.birthDate} onChange={handleChange} className="registerinputdate-user-edit" />
-                </div>
-                <div className='admin-phone'>
-                  <h3>เบอร์โทรศัพท์</h3>
-                  <input type="text" className='admin-phone-input' name="phone" value={form.phone} onChange={handleChange} />
-                </div>
-                <div className='admin-phone'>
-                  <h3>อาชีพ</h3>
-                  <input type="text" className='admin-phone-input' name="occupation" value={form.occupation} onChange={handleChange} />
-                </div>
-                <div className='admin-address'>
-                  <h3>ที่อยู่</h3>
-                  <textarea className='admin-address-input' name="address" value={form.address} onChange={handleChange} />
-                </div>
-                <div className='admin-password'>
-                  <h3>รหัสผ่าน</h3>
-                  <input type="password" className='admin-password-input' name="password" value={form.password} onChange={handleChange} />
-                </div>
-                <div className='admin-confirm-password'>
-                  <h3>ยืนยันรหัสผ่าน</h3>
-                  <input type="password" className='admin-confirm-password-input' name="confirmPassword" value={form.confirmPassword} onChange={handleChange} />
-                </div>
+
+            {/* ฟอร์มข้อมูล */}
+            <div className="admin-info-box">
+              <div className="admin-info-grid">
+                <label>
+                  รหัสผู้ใช้
+                  <input type="text" value={id} disabled />
+                </label>
+                <label>
+                  ชื่อผู้ใช้
+                  <input type="text" name="username" value={form.username} onChange={handleChange} />
+                </label>
+                <label>
+                  ชื่อจริง
+                  <input type="text" name="firstName" value={form.firstName} onChange={handleChange} />
+                </label>
+                <label>
+                  นามสกุล
+                  <input type="text" name="lastName" value={form.lastName} onChange={handleChange} />
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="email" value={form.email} onChange={handleChange} />
+                </label>
+                <label>
+                  เพศ
+                  <select name="gender" value={form.gender} onChange={handleChange}>
+                    <option value="">เลือกเพศ</option>
+                    <option value="male">ชาย</option>
+                    <option value="female">หญิง</option>
+                  </select>
+                </label>
+                <label>
+                  วัน/เดือน/ปี เกิด
+                  <input type="date" name="birthDate" value={form.birthDate} onChange={handleChange} />
+                </label>
+                <label>
+                  เบอร์โทรศัพท์
+                  <input type="text" name="phone" value={form.phone} onChange={handleChange} />
+                </label>
+                <label>
+                  อาชีพ
+                  <input type="text" name="occupation" value={form.occupation} onChange={handleChange} />
+                </label>
+                <label>
+                  ที่อยู่
+                  <textarea name="address" value={form.address} onChange={handleChange} />
+                </label>
+                <label>
+                  รหัสผ่านใหม่
+                  <input type="password" name="password" value={form.password} onChange={handleChange} />
+                </label>
+                <label>
+                  ยืนยันรหัสผ่าน
+                  <input type="password" name="confirmPassword" value={form.confirmPassword} onChange={handleChange} />
+                </label>
               </div>
-              <div className='btn-area'>
-                <button className='cancel-btn' type="button" onClick={() => navigate("/AdminUserPage")}>ยกเลิก</button>
-                <button className='confirm-btn2' type="submit">ยืนยัน</button>
+
+              {/* ปุ่ม */}
+              <div className="btn-area">
+                <button className="cancel-btn" type="button" onClick={() => navigate("/AdminUserPage")}>
+                  ยกเลิก
+                </button>
+                <button className="confirm-btn2" type="submit">
+                  ยืนยัน
+                </button>
               </div>
             </div>
           </form>
         </div>
       </section>
     </>
-  )
+  );
 }
-

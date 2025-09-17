@@ -66,12 +66,13 @@
     border-radius: 10px;
 }
 
-.add-btn {
+.add-btn-box {
     display: flex;
     justify-content: end;
+    background-color: #ffffff;
 }
 
-.add-btn button {
+.add-btn-box button {
     padding: 5px;
     border: none;
     border-radius: 10px;

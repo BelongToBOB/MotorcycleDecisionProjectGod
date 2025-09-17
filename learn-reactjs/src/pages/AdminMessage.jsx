@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 export default function AdminMessage() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedMessage, setSelectedMessage] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -61,7 +62,7 @@ export default function AdminMessage() {
                 <th>เบอร์</th>
                 <th>ข้อความ</th>
                 <th>วันที่ส่ง</th>
-                <th>ลบ</th>
+                <th>การจัดการ</th>
               </tr>
             </thead>
             <tbody>
@@ -71,15 +72,61 @@ export default function AdminMessage() {
                   <td>{m.name}</td>
                   <td>{m.email}</td>
                   <td>{m.tel}</td>
-                  <td>{m.content}</td>
+                  <td>
+                    <div className="msg-preview">
+                      {m.content.length > 40
+                        ? m.content.slice(0, 40) + "..."
+                        : m.content}
+                    </div>
+                    {m.content.length > 40 && (
+                      <button
+                        className="view-btn"
+                        onClick={() => setSelectedMessage(m)}
+                      >
+                        ดูเพิ่มเติม
+                      </button>
+                    )}
+                  </td>
                   <td>{new Date(m.createdAt).toLocaleString()}</td>
                   <td>
-                    <button onClick={() => handleDelete(m.message_id)} className="delete-btn">ลบ</button>
+                    <button
+                      onClick={() => handleDelete(m.message_id)}
+                      className="delete-btn"
+                    >
+                      ลบ
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        )}
+
+        {/* Popup Modal */}
+        {selectedMessage && (
+          <div
+            className="msg-modal-backdrop"
+            onClick={() => setSelectedMessage(null)}
+          >
+            <div
+              className="msg-modal-card"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="msg-modal-close"
+                onClick={() => setSelectedMessage(null)}
+              >
+                ✕
+              </button>
+              <h3>ข้อความจาก {selectedMessage.name}</h3>
+              <p><b>อีเมล:</b> {selectedMessage.email}</p>
+              <p><b>เบอร์:</b> {selectedMessage.tel}</p>
+              <p><b>วันที่ส่ง:</b> {new Date(selectedMessage.createdAt).toLocaleString()}</p>
+              <div className="msg-full-content">
+                {selectedMessage.content}
+              </div>
+            </div>
+          </div>
         )}
       </section>
     </>

@@ -25,6 +25,7 @@ import BikeCard from '../components/BikeCard'
 import ProfileUser from '../pages/ProfileUser'
 import Statistic from '../pages/Statistic'
 import AdminMessage from '../pages/AdminMessage'
+import Magazine from '../pages/Magazine'
 
 export default function AppRoutes() {
   return (
@@ -36,6 +37,7 @@ export default function AppRoutes() {
         <Route path="/Register" element={<Register />} />
         <Route path="/Info" element={<Info />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/Magazine" element={<Magazine />} />
 
         {/* Choose Bike */}
         <Route path="/Bikestyle" element={<BikeStyle />} />

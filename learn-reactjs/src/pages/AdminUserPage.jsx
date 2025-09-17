@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import Sidebar from '../components/Sidebar'
+import React, { useEffect, useState } from 'react';
+import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import '../style/AdminUserPage.css'
+import '../style/AdminUserPage.css';
 import AdminUserInfoBox from '../components/AdminUserInfoBox';
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -48,22 +48,47 @@ export default function AdminUserPage() {
             <h2>ข้อมูลรายการผู้ใช้</h2>
           </div>
           <div className="search-box">
-            <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
+            
             <input
               type="text"
-              placeholder="ชื่อผู้ใช้"
+              placeholder="ค้นหาชื่อผู้ใช้"
               className="search-input"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
           </div>
-          {filteredUsers.map(user =>
-            <AdminUserInfoBox
-              key={user.user_id}
-              user={user}
-              onDelete={handleDelete}
-            />
-          )}
+
+          <div className="table-container">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>รูป</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>User ID</th>
+                  <th>การจัดการ</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredUsers.length > 0 ? (
+                  filteredUsers.map(user => (
+                    <AdminUserInfoBox
+                      key={user.user_id}
+                      user={user}
+                      onDelete={handleDelete}
+                    />
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="no-data">
+                      ไม่มีข้อมูลผู้ใช้
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </>

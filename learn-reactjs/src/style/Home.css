@@ -18,94 +18,93 @@ section {
     background-color: #ffffff;
 }
 
-.text-wrap-con{
-    background-color: #fff;
-    display: flex;
-    padding: 1rem;
-}
-
-.text-wrap-con h2 {
-    font-family: "Kanit", sans-serif;
-    font-weight: 500;
-    font-style: italic;
-    font-size: 45px;
-    color: rgb(0, 0, 0);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    margin-left: 0.7rem;
-    }
-
-.text-wrap-con a {
-    font-family: "Anton", serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 45px;
-    color: rgb(255, 0, 0);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.text-wrap-con .a2 {
-    font-family: "Anton", serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 45px;
-    color: rgb(0, 0, 0);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
 .hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #d6d6d6;
-    gap: 1rem;
-    flex-wrap: wrap; /* รองรับหน้าจอเล็ก */
+  position: relative;
+  height: 100vh; /* เต็มจอ */
+  background-image: url("../images/herobg.jpg"); /* ใส่รูปพื้นหลัง */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55); /* ให้ text เด่นขึ้น */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.hero-content {
+  text-align: center;
+  color: white;
+  max-width: 800px;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--primary, #ff4444);
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  margin-bottom: 1rem;
+}
+
+.hero-content h2 {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+/* ปุ่ม signature */
+.cta-main {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff4444, #ff0000);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+}
+
+.cta-main:hover {
+  background: linear-gradient(135deg, #cc0000, #990000);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.55);
+}
+
+.cta-main:active {
+  transform: scale(0.97);
+}
+
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
   }
-  
-  .hero-content {
-    flex: 2;
-    max-width: 800px;
-    margin: 1rem;
-  }
-  
-  .hero-content h3 {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
   .hero-content h2 {
-    font-size: 1.5rem;
-    font-weight: 400;
-    font-style: normal;
+    font-size: 1.2rem;
   }
-  
-  .hero-content a {
-    display: flex;
-    justify-content: center;
+  .cta-main {
+    font-size: 1rem;
+    padding: 0.8rem 1.6rem;
   }
-  
-  .cta-button {
-    display: flex;
-    margin-top: 1rem;
-    background-color: red;
-    color: white;
-    font-weight: 500;
-    font-size: 20px;
-    padding: 1rem;
-    border-radius: 8px;
-    text-decoration: none;
-  }
-  
-  .cta-button:hover {
-    background-color: darkred;
-  }
-  
-  .hero-image img {
-    display: flex;
-    width: 390px;
-    max-width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
+}
+
 
 .mini-text {
     display: flex;
@@ -114,95 +113,82 @@ section {
     padding: 0.5rem;
     margin-bottom: 3rem;
 }
+.mini-text p {
+    color: #000000;
+}
 
 .hot-section {
-    padding: 1rem;
-    margin-top: 2rem;
-    background-color: #d9d9d9;
-  }
-  
-  .section-title {
-    font-size: 1.8rem;
-    color: rgb(255, 255, 255);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    background-color: red;
-    display: flex;
-    padding: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    justify-content: center;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    
-  }
-  
-  .bike-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-  }
-  
-  .bike-card.reverse {
-    flex-direction: row-reverse;
-  }
+  padding: 3rem 1rem;
+  background: #f1f1f1; /* เทาอ่อน minimal */
+}
 
-  @media screen and (max-width: 768px) {
-    .bike-img img{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(90deg, #ff0000, #cc0000);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  letter-spacing: 1px;
+}
 
-    .bike-card {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-  
-  .bike-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 700px;
-    max-width: 100%;
-    object-fit: contain;
-  }
+/* List */
+.bike-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
 
-  .bike-img-zt {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 600px;
-    max-width: 100%;
-    object-fit: contain;
-  }
-  
-  .bike-info {
-    width: 100%;
-    padding: 5rem 3rem;
-    border-radius: 8px;
-    color: white;
-    display: inline-block;
-    background-color: #333;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
-  }
+/* Card */
+.bike-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+}
 
-  .bike-info h3 {
-    font-family: "Kanit", sans-serif;
-    font-weight: 500;
-    font-size: 45px;
-    color: rgb(255, 255, 255);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  }
+/* Image */
+.bike-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
 
-  .bike-info p {
-    font-family: "Kanit", sans-serif;
-    font-weight: 500;
-    font-size: 25px;
-    color: rgb(255, 255, 255);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  }
+/* Info */
+.bike-info {
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.bike-info h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+  color: #111;
+}
+
+.bike-info p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0.3rem 0;
+}
+
+/* ราคาเด่น */
+.bike-info .price-hero {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  background: linear-gradient(90deg, #ff0000, #990000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
   
 
 .firstgridbox{

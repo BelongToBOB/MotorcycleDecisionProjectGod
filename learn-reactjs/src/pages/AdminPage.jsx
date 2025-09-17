@@ -11,7 +11,6 @@ export default function AdminPage() {
   const [admins, setAdmins] = useState([]);
   const [search, setSearch] = useState("");
 
-  // ดึงข้อมูลแอดมินทั้งหมดเมื่อเข้าเพจ
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/admin", {
@@ -21,10 +20,15 @@ export default function AdminPage() {
       .catch(() => setAdmins([]));
   }, []);
 
-  // ฟิลเตอร์ค้นหาชื่อ
+  // filter ค้นหา
   const filtered = admins.filter((admin) =>
     admin.username?.toLowerCase().includes(search.toLowerCase())
   );
+
+  // callback หลังลบ
+  const handleDelete = (id) => {
+    setAdmins((prev) => prev.filter((a) => a.user_id !== id));
+  };
 
   return (
     <>
@@ -35,19 +39,29 @@ export default function AdminPage() {
           <div className="admin-tag">
             <h2>ข้อมูลผู้ดูแลระบบ</h2>
           </div>
-          <div className="search-box">
-            <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
-            <input
-              type="text"
-              placeholder="ชื่อแอดมิน"
-              className="search-input"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          {filtered.map((admin) => (
-            <AdminInfoBox key={admin.user_id} admin={admin} />
-          ))}
+
+
+
+          {/* ✅ ตารางใหม่ */}
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>รูป</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>การจัดการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((admin) => (
+                <AdminInfoBox
+                  key={admin.user_id}
+                  admin={admin}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
     </>

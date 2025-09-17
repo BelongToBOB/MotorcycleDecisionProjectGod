@@ -1,28 +1,31 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import '../style/BikeTypeBox.css'
-import Swal from "sweetalert2";
+// BikeTypeBox.jsx
+import React from "react";
+import { Link } from "react-router-dom";
+import "../style/BikeTypeBox.css";
 
 export default function BikeTypeBox({ type, onDelete }) {
   return (
-    <div className='info-admin-box'>
-      <div className='info-part'>
-        <div className='info-admin-img'>
-          <img src={type.picture || "/default-bike-type.png"} alt="" />
-        </div>
-        <div className='info-admin'>
-          <p>รหัสประเภท: {type.moto_type_id}</p>
-          <p>ชื่อประเภท: {type.moto_type_name}</p>
-        </div>
-      </div>
-      <div className='edit-part'>
+    <tr>
+      <td>
+        <img
+          src={type.picture || "/default-bike-type.png"}
+          alt={type.moto_type_name}
+          className="table-avatar"
+        />
+      </td>
+      <td>{type.moto_type_id}</td>
+      <td>{type.moto_type_name}</td>
+      <td>
         <Link to={`/BikeTypeModify/${type.moto_type_id}`}>
-          <button className='edit-btn'>แก้ไข</button>
+          <button className="edit-btn">แก้ไข</button>
         </Link>
-        <button className='delete-btn' onClick={() => onDelete(type.moto_type_id)}>ลบ</button>
-      </div>
-    </div>
-  )
+        <button
+          className="delete-btn"
+          onClick={() => onDelete && onDelete(type.moto_type_id)}
+        >
+          ลบ
+        </button>
+      </td>
+    </tr>
+  );
 }
-
-

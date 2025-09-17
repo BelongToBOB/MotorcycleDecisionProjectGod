@@ -60,7 +60,6 @@ exports.register = async (req, res) => {
     try {
       const { emailOrUsername, password } = req.body
   
-      // ตรวจสอบว่าเป็น email หรือ username
       const isEmail = emailOrUsername.includes('@')
   
       const user = await prisma.user.findFirst({

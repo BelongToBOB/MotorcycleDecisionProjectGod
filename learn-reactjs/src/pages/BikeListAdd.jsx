@@ -110,7 +110,7 @@ export default function BikeListAdd() {
                     <input name="fuel_size" className='bike-fuel-size-input' value={form.fuel_size} onChange={handleChange}/>
                   </div>
                   <div className='bike-price'>
-                    <h3>ราคา</h3>
+                    <h3>ราคา (บาท)</h3>
                     <input name="moto_price" className='bike-price-input' value={form.moto_price} onChange={handleChange} />
                   </div>
                   <div className='bike-moreInfo'>

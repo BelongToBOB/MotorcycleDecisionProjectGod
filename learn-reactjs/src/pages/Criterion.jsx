@@ -100,7 +100,6 @@ export default function Criterion() {
       });
     } catch (err) {
       console.error("โหลด options ไม่สำเร็จ", err);
-      // ไม่ต้องทำอะไรเพิ่มเติม ให้ UI รับรู้ options คงเดิม
     }
   };
 
@@ -112,18 +111,23 @@ export default function Criterion() {
   const handleSelect = (key, value) => {
   const next = { ...selected };
 
-  if (key === "brand") {
-    // reset ทุกอย่างยกเว้น brand
-    next.price = "";
-    next.cc = "";
-    next.fuel = "";
-    next.maintenance = "";
+  if (selected[key] === value) {
+    next[key] = "";
+  } else {
+    if (key === "brand") {
+      // reset ทุกอย่างยกเว้น brand
+      next.price = "";
+      next.cc = "";
+      next.fuel = "";
+      next.maintenance = "";
+    }
+    next[key] = value;
   }
 
-  next[key] = value;
   setSelected(next);
   fetchOptions(next);
 };
+
 
 
   const isDisabled = (key, value) => {

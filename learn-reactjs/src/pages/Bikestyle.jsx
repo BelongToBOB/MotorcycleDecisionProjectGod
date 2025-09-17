@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import '../style/BikeStyle.css'
-import { useNavigate } from 'react-router-dom'
-import { useRecommend } from '../context/RecommendContext'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import "../style/BikeStyle.css";
+import { useNavigate } from "react-router-dom";
+import { useRecommend } from "../context/RecommendContext";
+import axios from "axios";
 
 export default function BikeStyle() {
   const { setSelectedType, selectedType } = useRecommend();
@@ -13,13 +13,14 @@ export default function BikeStyle() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/Login');
+      navigate("/Login");
       return;
     }
-    axios.get("http://localhost:5000/api/mototype", {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(res => setTypes(res.data))
+    axios
+      .get("http://localhost:5000/api/mototype", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setTypes(res.data))
       .catch(() => setTypes([]));
   }, []);
 
@@ -37,13 +38,12 @@ export default function BikeStyle() {
             <h1>เลือกประเภทรถจักรยานยนต์</h1>
             <div className="typebike-box">
               {types.length === 0 && <div>ไม่พบข้อมูลประเภท</div>}
-              {types.map(type => (
+              {types.map((type) => (
                 <div
-                  className="type-choice"
+                  className={`type-choice ${
+                    selectedType === type.moto_type_id ? "selected" : ""
+                  }`}
                   key={type.moto_type_id}
-                  style={{
-                    border: selectedType === type.moto_type_id ? "2px solid red" : "1px solid #ddd",
-                  }}
                   onClick={() => handleSelectType(type.moto_type_id)}
                   tabIndex={0}
                   title={type.moto_type_name}
@@ -52,7 +52,7 @@ export default function BikeStyle() {
                     src={type.picture || "/default-bike-type.png"}
                     alt={type.moto_type_name}
                   />
-                  <p style={{ fontWeight: 500 }}>{type.moto_type_name}</p>
+                  <p>{type.moto_type_name}</p>
                 </div>
               ))}
             </div>

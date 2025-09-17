@@ -12,7 +12,7 @@ export default function BikeDetailCard({ bike, onClose }) {
           <div>
             <h2>{bike.moto_name}</h2>
             <h4>ยี่ห้อ: {bike.moto_brand}</h4>
-            <h5>ประเภท: {bike.moto_type?.moto_type_name || '-'}</h5>
+            <h5>ประเภท: {bike.mototype?.moto_type_name || '-'}</h5>
           </div>
         </div>
         <div className="bike-modal-body">

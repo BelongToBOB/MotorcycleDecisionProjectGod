@@ -21,7 +21,7 @@ export default function ProfileUser() {
       .then((res) => {
         // สร้าง map {id: name}
         const map = {};
-        res.data.forEach((t) => (map[t.id] = t.moto_type_name));
+        res.data.forEach((t) => (map[t.moto_type_id] = t.moto_type_name));
         setTypeMap(map);
       });
   }, []);
@@ -127,15 +127,15 @@ export default function ProfileUser() {
                       {new Date(h.createdAt).toLocaleString()}
                     </div>
                     <div className="history-row">
-                      <span>Type:</span>
+                      <span>ประเภท:</span>
                       <b>{typeMap[h.selectedType] || h.selectedType || "-"}</b>
                     </div>
                     <div className="history-row">
-                      <span>Brand:</span>
+                      <span>ยี่ห้อ:</span>
                       <b>{h.criteria?.brand || "เลือกทุกแบรนด์"}</b>
                     </div>
                     <div className="history-row">
-                      <span>Priority:</span>
+                      <span>ลำดับความสำคัญ:</span>
                       <ul>
                         {Array.isArray(h.priority) ? (
                           h.priority.map((p, idx) => (
@@ -153,7 +153,7 @@ export default function ProfileUser() {
                     </div>
 
                     <div className="history-row">
-                      <span>Criteria:</span>
+                      <span>เกณฑ์:</span>
                       <ul>
                         {h.criteria && typeof h.criteria === "object" ? (
                           Object.entries(h.criteria).map(([k, v]) => (
@@ -167,7 +167,7 @@ export default function ProfileUser() {
                       </ul>
                     </div>
                     <div className="history-row">
-                      <span>Result:</span>
+                      <span>ผลลัพธ์:</span>
                       <ul>
                         {Array.isArray(h.result) ? (
                           h.result.map((r, idx) => (

@@ -1,5 +1,5 @@
 .section-user-page {
-    background-image: url("../images/suzukiblur.png");
+    
     background-size: cover;
     min-height: 100vh;
     overflow: auto;
@@ -14,6 +14,7 @@
     margin-top: 1rem;
     background-color: #ffffff;
     border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .user-tag {

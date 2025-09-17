@@ -1,35 +1,46 @@
-const prisma = require('../config/prisma');
+const prisma = require("../config/prisma");
 
 exports.overview = async (req, res) => {
   try {
-    const histories = await prisma.recommendhistory.findMany({});
+    const histories = await prisma.recommendhistory.findMany({
+      include: { user: true }, // ✅ ดึง user มาด้วย
+    });
+
     const types = await prisma.mototype.findMany();
     const typeMap = {};
-    types.forEach(t => typeMap[t.id] = t.moto_type_name);
+    types.forEach((t) => (typeMap[t.moto_type_id] = t.moto_type_name));
 
-    // เตรียมตัวแปรนับ
-    const typeCount = {}, brandCount = {}, priceCount = {}, modelCount = {};
-    const ccCount = {}, fuelCount = {}, fuelSizeCount = {}, maintenanceCount = {};
+    // ตัวนับ
+    const typeCount = {},
+      brandCount = {},
+      priceCount = {},
+      modelCount = {};
 
     for (const h of histories) {
-      if (h.selectedType) typeCount[h.selectedType] = (typeCount[h.selectedType] || 0) + 1;
+      if (h.selectedType) {
+        typeCount[h.selectedType] = (typeCount[h.selectedType] || 0) + 1;
+      }
 
       let criteria = {};
-      try { criteria = JSON.parse(h.criteria); } catch {}
+      try {
+        criteria = JSON.parse(h.criteria);
+      } catch {}
 
-      // นับทุก criteria field
-      if (criteria.brand) brandCount[criteria.brand] = (brandCount[criteria.brand] || 0) + 1;
-      if (criteria.price) priceCount[criteria.price] = (priceCount[criteria.price] || 0) + 1;
-      if (criteria.cc) ccCount[criteria.cc] = (ccCount[criteria.cc] || 0) + 1;
-      if (criteria.fuel) fuelCount[criteria.fuel] = (fuelCount[criteria.fuel] || 0) + 1;
-      if (criteria.fuel_size) fuelSizeCount[criteria.fuel_size] = (fuelSizeCount[criteria.fuel_size] || 0) + 1;
-      if (criteria.maintenance) maintenanceCount[criteria.maintenance] = (maintenanceCount[criteria.maintenance] || 0) + 1;
+      if (criteria.brand)
+        brandCount[criteria.brand] = (brandCount[criteria.brand] || 0) + 1;
+      if (criteria.price)
+        priceCount[criteria.price] = (priceCount[criteria.price] || 0) + 1;
 
+      // ✅ result เก็บเป็น array → ดึง index 0
       let result = [];
-      try { result = JSON.parse(h.result); } catch {}
+      try {
+        result = JSON.parse(h.result);
+      } catch {}
       if (Array.isArray(result) && result.length > 0) {
         const best = result[0];
-        if (best && best.moto_name) modelCount[best.moto_name] = (modelCount[best.moto_name] || 0) + 1;
+        if (best?.moto_name) {
+          modelCount[best.moto_name] = (modelCount[best.moto_name] || 0) + 1;
+        }
       }
     }
 
@@ -43,15 +54,26 @@ exports.overview = async (req, res) => {
     const latest = histories
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       .slice(0, 10)
-      .map(h => ({
-        id: h.id,
-        userId: h.userId,
-        selectedType: typeMap[h.selectedType] || h.selectedType,
-        criteria: (() => { try { return JSON.parse(h.criteria) } catch { return {} } })(),
-        createdAt: h.createdAt
-      }));
+      .map((h) => {
+        let criteria = {};
+        let result = [];
+        try {
+          criteria = JSON.parse(h.criteria);
+        } catch {}
+        try {
+          result = JSON.parse(h.result);
+        } catch {}
+        return {
+          history_id: h.history_id,
+          user: h.user ? { username: h.user.username } : null, // ✅ ดึง username ด้วย
+          selectedType: typeMap[h.selectedType] || h.selectedType,
+          criteria,
+          result,
+          createdAt: h.createdAt,
+        };
+      });
 
-    // แปลงประเภท
+    // แปลง type
     const typeCountNamed = {};
     for (const [tid, count] of Object.entries(typeCount)) {
       typeCountNamed[typeMap[tid] || tid] = count;
@@ -62,14 +84,10 @@ exports.overview = async (req, res) => {
       typeCount: typeCountNamed,
       brandCount,
       priceCount,
-      ccCount,
-      fuelCount,
-      fuelSizeCount,
-      maintenanceCount,
-      latest
+      latest,
     });
   } catch (err) {
-    console.error('Statistic error', err);
+    console.error("Statistic error", err);
     res.status(500).json({ message: "Server Error" });
   }
 };

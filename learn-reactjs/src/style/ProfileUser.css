@@ -28,20 +28,20 @@
     height: 128px;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid #1e90ff44;
+    border: 4px solid #ff5757;
     background: #eef1f5;
     transition: box-shadow 0.2s;
     cursor: pointer;
   }
   .profile-img img:hover {
-    box-shadow: 0 2px 20px #1e90ff44;
+    box-shadow: 0 2px 20px #ff5757;
   }
   
   .change-img-btn {
     display: block;
     margin: 10px auto 0;
     font-size: 15px;
-    background: #1e90ff;
+    background: #ff5757;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -50,7 +50,7 @@
     transition: background 0.15s;
   }
   .change-img-btn:hover {
-    background: #145bb7;
+    background: #ff5757;
   }
   
   .profile-user-info {
@@ -74,7 +74,7 @@
   
   .recommend-history h4 {
     margin-bottom: 8px;
-    color: #1e90ff;
+    color: #ff5757;
     font-size: 17px;
   }
   
@@ -115,7 +115,7 @@
     box-shadow: 0 4px 20px rgba(30, 144, 255, 0.18);
   }
   .history-date {
-    color: #007bff;
+    color: #ff5757;
     font-weight: bold;
     margin-bottom: 8px;
     font-size: 1.02rem;

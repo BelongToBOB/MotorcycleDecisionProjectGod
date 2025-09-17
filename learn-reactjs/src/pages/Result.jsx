@@ -110,7 +110,7 @@ export default function Result() {
               <h1 className='bestRank2'>{best.moto_brand}<a> </a>{best.moto_name}</h1>
               <div className='info-result-box'>
                 <h1 className='info-result-box1'>ยี่ห้อ : {best.moto_brand}</h1>
-                <h1 className='info-result-box2'>ประเภท : {best.moto_type?.moto_type_name || "-"}</h1>
+                <h1 className='info-result-box2'>ประเภท : {best.mototype?.moto_type_name || "-"}</h1>
                 <h1 className='info-result-box3'>รายละเอียด</h1>
                 <p>{best.moto_content}</p>
                 <h1 className='info-result-box4'>ราคา {best.moto_price?.toLocaleString()} บาท</h1>
@@ -137,7 +137,7 @@ export default function Result() {
               <div className='near-choice-box-info'>
                 <h3>ยี่ห้อ : {item.moto_brand}</h3>
                 <h3>รุ่น : {item.moto_name}</h3>
-                <h3>ประเภท : {item.moto_type?.moto_type_name || "-"}</h3>
+                <h3>ประเภท : {item.mototype?.moto_type_name || "-"}</h3>
                 <h3>ราคา : {item.moto_price?.toLocaleString()} บาท</h3>
               </div>
               <button

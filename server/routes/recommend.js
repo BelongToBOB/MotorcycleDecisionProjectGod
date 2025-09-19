@@ -4,4 +4,4 @@ const recommendController = require('../controller/recommendController');
 
 router.post('/', recommendController.recommend);
 
-module.exports = router;
+module.exports = router

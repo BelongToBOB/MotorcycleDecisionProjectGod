@@ -1,12 +1,11 @@
-const express = require('express')
-const router = express.Router()
-const adminController = require('../controller/adminController')
-const { authCheck, adminOnly } = require('../middlewares/authCheck')
+const express = require('express');
+const router = express.Router();
+const adminController = require('../controller/adminController');
+const { authCheck, adminOnly } = require('../middlewares/authCheck');
 
-router.get('/admin', authCheck, adminOnly, adminController.getAllAdmins)
-router.get('/admin/:id', authCheck, adminOnly, adminController.getAdminById)
-router.put('/admin/:id', authCheck, adminOnly, adminController.updateAdmin)
-router.delete('/admin/:id', authCheck, adminOnly, adminController.deleteAdmin)
+router.get('/', authCheck, adminOnly, adminController.getAllAdmins);
+router.get('/:id', authCheck, adminOnly, adminController.getAdminById);
+router.put('/:id', authCheck, adminOnly, adminController.updateAdmin);
+router.delete('/:id', authCheck, adminOnly, adminController.deleteAdmin);
 
 module.exports = router
-

@@ -7,11 +7,10 @@ const { authCheck, adminCheck } = require('../middlewares/authCheck');
 const userController = require('../controller/userController');
 
 router.put('/update-picture', authCheck, upload.single('picture'), userController.updatePicture);
-
-router.get('/me', authCheck, userController.me); 
+router.get('/me', authCheck, userController.me);
 router.get('/', authCheck, adminCheck, userController.listUsers);
 router.get('/:id', authCheck, userController.getUser);
 router.put('/:id', authCheck, adminCheck, userController.updateUser);
-router.delete('/:id', authCheck, userController.deleteUser);
+router.delete('/:id', authCheck, adminCheck, userController.deleteUser);
 
-module.exports = router;
+module.exports = router

@@ -259,15 +259,26 @@ export default function Statistic() {
           <div className="highlight-card">
             <h3>รุ่นที่ถูกเลือกมากที่สุด</h3>
             <p>
-              <b>{stat.topModels[0]?.model || stat.topModels[0]?.moto_name}</b>
+              <b>
+                {stat.topModels[0]?.brand
+                  ? `${stat.topModels[0].brand} ${
+                      stat.topModels[0]?.model || stat.topModels[0]?.moto_name
+                    }`
+                  : stat.topModels[0]?.model || stat.topModels[0]?.moto_name}
+              </b>
             </p>
             <span>{stat.topModels[0]?.count} ครั้ง</span>
+
             {stat.topModels.slice(1, 3).map((m, i) => (
               <div key={i} className="sub-rank">
-                {m.model || m.moto_name} ({m.count} ครั้ง)
+                {m.brand
+                  ? `${m.brand} ${m.model || m.moto_name}`
+                  : m.model || m.moto_name}{" "}
+                ({m.count} ครั้ง)
               </div>
             ))}
           </div>
+
           <div className="highlight-card">
             <h3>ยี่ห้อที่ถูกเลือกบ่อย</h3>
             <p>
@@ -305,7 +316,7 @@ export default function Statistic() {
           </div>
           <div className="summary-card">
             <h3>รุ่นที่ครอบคลุม</h3>
-            <p>{stat.topModels.length} รุ่น</p>
+            <p>18 รุ่น</p>
           </div>
           <div className="summary-card">
             <h3>กิจกรรมล่าสุด</h3>

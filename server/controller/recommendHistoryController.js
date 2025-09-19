@@ -61,6 +61,15 @@ exports.getStatistic = async (req, res) => {
       orderBy: { createdAt: "desc" },
     });
 
+    // โหลดข้อมูลมอเตอร์ไซค์ทั้งหมดมาเก็บ map
+    const motorcycles = await prisma.motorcycle.findMany({
+      select: { moto_name: true, moto_brand: true },
+    });
+    const motoMap = {};
+    motorcycles.forEach(m => {
+      motoMap[m.moto_name] = m.moto_brand;
+    });
+
     // --- Count ---
     const brandCount = {};
     const typeCount = {};
@@ -77,7 +86,7 @@ exports.getStatistic = async (req, res) => {
         result = JSON.parse(h.result);
       } catch {}
 
-      // ✅ นับ brand
+      // ✅ นับ brand จาก criteria หรือจาก DB
       if (criteria.brand) {
         brandCount[criteria.brand] = (brandCount[criteria.brand] || 0) + 1;
       }
@@ -92,19 +101,25 @@ exports.getStatistic = async (req, res) => {
         priceCount[criteria.price] = (priceCount[criteria.price] || 0) + 1;
       }
 
-      // ✅ นับ model จาก result[0]
+      // ✅ นับ model + brand
       if (Array.isArray(result) && result.length > 0) {
         const best = result[0];
         const modelName = best?.moto_name || best?.model;
+        const brandName = motoMap[modelName] || best?.moto_brand || criteria.brand;
+
         if (modelName) {
-          modelCount[modelName] = (modelCount[modelName] || 0) + 1;
+          const key = `${brandName || "ไม่ทราบ"}||${modelName}`;
+          modelCount[key] = (modelCount[key] || 0) + 1;
         }
       }
     });
 
     // --- Top 10 Models ---
     const topModels = Object.entries(modelCount)
-      .map(([model, count]) => ({ model, count }))
+      .map(([key, count]) => {
+        const [brand, model] = key.split("||");
+        return { brand, model, count };
+      })
       .sort((a, b) => b.count - a.count)
       .slice(0, 10);
 
@@ -123,6 +138,7 @@ exports.getStatistic = async (req, res) => {
     res.status(500).json({ message: "Server Error", err });
   }
 };
+
 
 /**
  * ดึงประวัติของ user คนเดียว

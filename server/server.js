@@ -31,6 +31,7 @@ const clientDist = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientDist));
 
 // catch-all สำหรับ React Router
-app.get('*', (req, res) => {
-  res.sendFile(path.join(clientDist, 'index.html'));
+app.use((req, res) => {
+  res.sendFile(path.join(clientDist, "index.html"));
 });
+

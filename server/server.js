@@ -13,6 +13,19 @@ const recommendHistoryRouter = require('./routes/recommendHistory');
 const statisticRoute = require('./routes/statistic');
 const criteriaRoutes = require('./routes/criteriaRoutes');
 
+// ===== เสิร์ฟ React build (Vite) =====
+const clientDist = path.join(__dirname, "..", "client", "dist");
+app.use(express.static(clientDist));
+
+// ===== รองรับ React Router (กันรีเฟรชแล้ว 404) =====
+app.get("*", (req, res) => {
+  res.sendFile(path.join(clientDist, "index.html"));
+});
+
+// ===== ใช้พอร์ตจาก env (สำคัญมาก) =====
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 //middleware
 app.use(morgan('dev'))
 app.use(express.json())

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../style/Magazine.css";
 import Navbar from "../components/Navbar";
 import Scoopy from "../images/HondaBike/scoopyi.png";
-import Aerox from "../images/YamahaBike/aerox155.png";
+import Aerox from "../images/YamahaBike/Aerox155.png";
 import Adv160 from "../images/HondaBike/adv160.png";
 import Tenere from "../images/YamahaBike/Tenere700.png";
 import Nx500 from "../images/HondaBike/nx500.png";

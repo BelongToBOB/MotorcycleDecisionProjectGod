@@ -19,9 +19,12 @@ const clientDist = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientDist));
 
 // ===== Auto load ทุกไฟล์ใน ./routes =====
-readdirSync('./routes').forEach((file) => {
-  app.use('/api', require('./routes/' + file));
-});
+readdirSync('./routes')
+  .filter(file => file.endsWith('.js'))   //
+  .forEach(file => {
+    app.use('/api', require('./routes/' + file));
+  });
+
 
 // ===== รองรับ React Router (กันรีเฟรชแล้ว 404) =====
 app.get("*", (req, res) => {

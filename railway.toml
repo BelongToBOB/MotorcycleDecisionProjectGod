@@ -1,2 +1,5 @@
 [build]
 root = "server"
+
+[deploy]
+startCommand = "npm start"

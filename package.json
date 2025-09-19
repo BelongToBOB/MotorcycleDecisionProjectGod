@@ -1,11 +1,12 @@
 {
-  "name": "moto-fullstack",
+  "name": "root",
   "private": true,
   "scripts": {
-    "install-client": "cd client && npm ci || npm install",
-    "install-server": "cd server && npm ci || npm install",
     "postinstall": "npm run install-client && npm run install-server",
-    "build": "cd client && npm run build && cd .. && cd server && (npm run prisma:deploy || npm run prisma:push || true)",
-    "start": "cd server && npm start"
+    "install-client": "cd client && npm ci || npm install",
+    "install-server": "cd server && npm ci || npm install"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

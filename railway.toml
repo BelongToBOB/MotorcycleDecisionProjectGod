@@ -1,7 +1,14 @@
 [build]
 builder = "NIXPACKS"
 buildCommand = "npm install && npm run build"
-root = "server"
+startCommand = "npm run preview"
+
+[env]
+NODE_VERSION = "20"
 
 [deploy]
+rootDirectory = "client"
 startCommand = "npm start"
+
+
+

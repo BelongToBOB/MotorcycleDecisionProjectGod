@@ -5,8 +5,8 @@
     "postinstall": "npm run install-client && npm run install-server",
     "install-client": "cd client && npm ci || npm install",
     "install-server": "cd server && npm ci || npm install",
-    "build": "cd client && npm run build",
-    "start": "cd server && node server.js"
+    "start": "cd server && node server.js",
+    "build": "cd client && npm install && npm run build"
   },
   "engines": {
     "node": ">=20"

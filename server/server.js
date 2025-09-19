@@ -5,6 +5,7 @@ const app = express()
 const morgan = require('morgan')
 const { readdirSync } = require('fs')
 const cors = require('cors')
+const path = require("path");
 
 const uploadRoutes = require('./routes/upload');
 const recommendRoute = require('./routes/recommend');

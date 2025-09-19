@@ -14,7 +14,6 @@ export default function Login() {
     password: "",
   });
 
-  
   const { setUser, setToken } = useUserStore();
 
   const handleChange = (e) => {
@@ -27,7 +26,7 @@ export default function Login() {
     }
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/login`, {
+      const res = await axios.post(`${API_BASE_URL}/auth/login`, {
         emailOrUsername: form.emailOrUsername,
         password: form.password,
       });
@@ -37,9 +36,9 @@ export default function Login() {
       const { token, payload } = res.data;
 
       localStorage.setItem("token", token);
-      setToken(token);  
-      // console.log("Token ที่ถูกบันทึก:", token);     
-      setUser(payload);      // บันทึกข้อมูลผู้ใช้
+      setToken(token);
+      // console.log("Token ที่ถูกบันทึก:", token);
+      setUser(payload); // บันทึกข้อมูลผู้ใช้
       toast.success("เข้าสู่ระบบสำเร็จ");
 
       if (payload.role === "admin") {
@@ -47,7 +46,6 @@ export default function Login() {
       } else {
         navigate("/");
       }
-
     } catch (err) {
       console.error(err);
       toast.error(err.response?.data?.message || "เข้าสู่ระบบไม่สำเร็จ");
@@ -70,7 +68,8 @@ export default function Login() {
                 value={form.emailOrUsername}
                 onChange={handleChange}
               />
-              <br /><br />
+              <br />
+              <br />
               <input
                 type="password"
                 placeholder="Password"

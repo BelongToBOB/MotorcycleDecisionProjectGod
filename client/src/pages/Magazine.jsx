@@ -13,7 +13,7 @@ import R1M from "../images/YamahaBike/R1M.png";
 import Wave125i from "../images/HondaBike/wave125i.png";
 import finn from "../images/YamahaBike/Finn.png";
 import smash from "../images/SuzukiBike/Smash-Fi.png"
-import mt09 from "../images/YamahaBike/mt09.png"
+import mt09 from "../images/YamahaBike/Mt09.png"
 import z900 from "../images/KawasakiBike/z900.jpg"
 import hornet750 from "../images/HondaBike/cb750hornet.png"
 

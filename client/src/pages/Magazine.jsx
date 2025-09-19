@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Scoopy from "../images/HondaBike/scoopyi.png";
 import Aerox from "../images/YamahaBike/aerox155.png";
 import Adv160 from "../images/HondaBike/adv160.png";
-import Tenere from "../images/YamahaBike/tenere700.png";
+import Tenere from "../images/YamahaBike/Tenere700.png";
 import Nx500 from "../images/HondaBike/nx500.png";
 import R1300 from "../images/BMWBike/r1300gs.png";
 import Cbr600rr from "../images/HondaBike/cbr600rr.png";

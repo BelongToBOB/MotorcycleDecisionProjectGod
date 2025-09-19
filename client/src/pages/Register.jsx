@@ -5,6 +5,7 @@ import '../style/Register.css'
 import dropDown from '../images/dropdown.png'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import API_BASE_URL from "../config";
 
 export default function Register() {
   const navigate = useNavigate()
@@ -33,7 +34,7 @@ export default function Register() {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/register', {
+      await axios.post(`${API_BASE_URL}/api/register`, {
         username: form.username, 
         email: form.email,
         password: form.password,

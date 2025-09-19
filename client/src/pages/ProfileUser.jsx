@@ -4,6 +4,7 @@ import "../style/ProfileUser.css";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import API_BASE_URL from "../config";
 
 export default function ProfileUser() {
   const [user, setUser] = useState(null);
@@ -15,7 +16,7 @@ export default function ProfileUser() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/mototype", {
+      .get(`${API_BASE_URL}/mototype`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => {
@@ -32,7 +33,7 @@ export default function ProfileUser() {
       const token = localStorage.getItem("token");
       if (!token) return;
       try {
-        const res = await axios.get("http://localhost:5000/api/user/me", {
+        const res = await axios.get(`${API_BASE_URL}/user/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data);
@@ -45,7 +46,7 @@ export default function ProfileUser() {
       if (!token) return;
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/recommend-history/mine",
+          `${API_BASE_URL}/recommend-history/mine`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -70,7 +71,7 @@ export default function ProfileUser() {
     const token = localStorage.getItem("token");
     toast.info("Uploading...");
     axios
-      .put("http://localhost:5000/api/user/update-picture", formData, {
+      .put(`${API_BASE_URL}/user/update-picture`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

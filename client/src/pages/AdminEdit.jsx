@@ -5,6 +5,7 @@ import "../style/AdminEdit.css";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import API_BASE_URL from "../config";
 
 export default function AdminEdit() {
   const { user_id } = useParams();
@@ -26,7 +27,7 @@ export default function AdminEdit() {
   // โหลดข้อมูลแอดมิน
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/admin/${user_id}`, {
+      .get(`${API_BASE_URL}/admin/${user_id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => {
@@ -61,7 +62,7 @@ export default function AdminEdit() {
     toast.info("กำลังอัปโหลด...");
 
     axios
-      .put(`http://localhost:5000/api/admin/${user_id}/upload`, formData, {
+      .put(`${API_BASE_URL}/admin/${user_id}/upload`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -89,7 +90,7 @@ export default function AdminEdit() {
       if (!form.password) delete updateBody.password;
       delete updateBody.confirmPassword;
 
-      await axios.put(`http://localhost:5000/api/admin/${user_id}`, updateBody, {
+      await axios.put(`${API_BASE_URL}/api/admin/${user_id}`, updateBody, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       toast.success("อัปเดตข้อมูลสำเร็จ");

@@ -18,6 +18,7 @@ import {
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
 import dayjs from "dayjs";
+import API_BASE_URL from "../config";
 
 export default function Statistic() {
   const [stat, setStat] = useState(null);
@@ -44,13 +45,13 @@ export default function Statistic() {
       try {
         const token = localStorage.getItem("token");
         const [statRes, typeRes, historyRes] = await Promise.all([
-          fetch("http://localhost:5000/api/history/statistic", {
+          fetch(`${API_BASE_URL}/history/statistic`, {
             headers: { Authorization: `Bearer ${token}` },
           }).then((r) => r.json()),
-          fetch("http://localhost:5000/api/mototype", {
+          fetch(`${API_BASE_URL}/mototype`, {
             headers: { Authorization: `Bearer ${token}` },
           }).then((r) => r.json()),
-          fetch("http://localhost:5000/api/history", {
+          fetch(`${API_BASE_URL}/history`, {
             headers: { Authorization: `Bearer ${token}` },
           }).then((r) => r.json()),
         ]);

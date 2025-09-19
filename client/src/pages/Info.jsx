@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../style/Info.css';
+import API_BASE_URL from "../config";
 
 // รูปโลโก้แบรนด์
 import Honda from '../images/brandLogo/Honda_Logo.svg-removebg-preview.png'
@@ -51,13 +52,14 @@ export default function Info() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     const fetchTypes = async () => {
       try {
         const token = localStorage.getItem("token");
         
-        const res = await axios.get("http://localhost:5000/api/mototype", {
+        const res = await axios.get(`${API_BASE_URL}/mototype`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (Array.isArray(res.data)) setTypeOptions(res.data);

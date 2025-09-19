@@ -5,6 +5,7 @@ import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/userStore';
 import ProfileUser from '../pages/ProfileUser';
+import API_BASE_URL from "../config";
 
 function Navbar() {
   const navigate = useNavigate()

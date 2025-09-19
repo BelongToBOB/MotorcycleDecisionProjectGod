@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/userStore'; // ถ้าใช้ Zustand/Context สำหรับ auth
 import '../style/Sidebar.css';
+import API_BASE_URL from "../config";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);

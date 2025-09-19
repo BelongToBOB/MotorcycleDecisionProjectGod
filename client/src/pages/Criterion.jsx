@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import "../style/Criterion.css";
 import { useRecommend } from "../context/RecommendContext";
+import API_BASE_URL from "../config";
 
 const PRICE_ORDER = [
   "ไม่เกิน 50,000 บาท",
@@ -63,7 +64,7 @@ export default function Criterion() {
     try {
       const qs = new URLSearchParams({ typeId: selectedType, ...criteria });
       const res = await fetch(
-        `http://localhost:5000/api/criteria-options-dynamic?${qs.toString()}`,
+        `${API_BASE_URL}/criteria-options-dynamic?${qs.toString()}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
 

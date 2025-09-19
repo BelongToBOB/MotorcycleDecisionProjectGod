@@ -6,6 +6,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import ImageUploader from '../components/ImageUploader'
 import '../style/BikeTypeModify.css'
+import API_BASE_URL from "../config";
 
 export default function BikeTypeModify() {
   const { id } = useParams()
@@ -16,7 +17,7 @@ export default function BikeTypeModify() {
   })
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/mototype/${id}`, {
+    axios.get(`${API_BASE_URL}/mototype/${id}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     })
     .then(res => {
@@ -36,7 +37,7 @@ export default function BikeTypeModify() {
     e.preventDefault()
     if (!form.moto_type_name.trim()) return toast.error("กรุณาระบุชื่อประเภท")
     try {
-      await axios.put(`http://localhost:5000/api/mototype/${id}`, form, {
+      await axios.put(`${API_BASE_URL}/mototype/${id}`, form, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       })
       toast.success("อัปเดตข้อมูลสำเร็จ")

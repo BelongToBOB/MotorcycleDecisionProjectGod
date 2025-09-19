@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import ImageUploader from '../components/ImageUploader'
+import API_BASE_URL from "../config";
 
 export default function BikeListAdd() {
   const [form, setForm] = useState({
@@ -25,7 +26,7 @@ export default function BikeListAdd() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/mototype", {
+    axios.get(`${API_BASE_URL}/mototype`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     })
     .then(res => setTypes(res.data))
@@ -40,7 +41,7 @@ export default function BikeListAdd() {
     if (!form.moto_name || !form.moto_type_id) return toast.error("กรอกข้อมูลให้ครบ");
 
     try {
-      await axios.post("http://localhost:5000/api/motorcycle", form, {
+      await axios.post(`${API_BASE_URL}/motorcycle`, form, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       });
       toast.success("เพิ่มข้อมูลสำเร็จ");

@@ -7,13 +7,14 @@ import '../style/AdminUserPage.css';
 import AdminUserInfoBox from '../components/AdminUserInfoBox';
 import axios from "axios";
 import { toast } from "react-toastify";
+import API_BASE_URL from "../config";
 
 export default function AdminUserPage() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/user", {
+    axios.get(`${API_BASE_URL}/user`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     })
     .then(res => setUsers(res.data))
@@ -23,7 +24,7 @@ export default function AdminUserPage() {
   const handleDelete = async (id) => {
     if (window.confirm("ยืนยันลบผู้ใช้นี้?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/user/${id}`, {
+        await axios.delete(`${API_BASE_URL}/user/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
         });
         setUsers(users.filter(u => u.user_id !== id));

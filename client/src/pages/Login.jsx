@@ -5,6 +5,7 @@ import "../style/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useUserStore } from "../store/userStore";
+import API_BASE_URL from "../config";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function Login() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/login", {
+      const res = await axios.post(`${API_BASE_URL}/login`, {
         emailOrUsername: form.emailOrUsername,
         password: form.password,
       });

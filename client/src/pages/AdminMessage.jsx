@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import "../style/AdminMessage.css";
 import Swal from "sweetalert2";
+import API_BASE_URL from "../config";
 
 export default function AdminMessage() {
   const [messages, setMessages] = useState([]);
@@ -11,7 +12,7 @@ export default function AdminMessage() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch("http://localhost:5000/api/message", {
+    fetch(`${API_BASE_URL}/api/message`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -34,7 +35,7 @@ export default function AdminMessage() {
     if (confirm.isConfirmed) {
       try {
         const token = localStorage.getItem("token");
-        await fetch(`http://localhost:5000/api/message/${message_id}`, {
+        await fetch(`${API_BASE_URL}/message/${message_id}`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
         });

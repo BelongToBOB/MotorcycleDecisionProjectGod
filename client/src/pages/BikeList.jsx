@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import "../style/BikeList.css";
+import API_BASE_URL from "../config";
 
 export default function BikeList() {
   const [bikes, setBikes] = useState([]);
@@ -17,7 +18,7 @@ export default function BikeList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/motorcycle", {
+      .get(`${API_BASE_URL}/motorcycle`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => setBikes(res.data))
@@ -26,7 +27,7 @@ export default function BikeList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/mototype", {
+      .get(`${API_BASE_URL}/mototype`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => setTypes(res.data))
@@ -47,7 +48,7 @@ export default function BikeList() {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:5000/api/motorcycle/${id}`, {
+        await axios.delete(`${API_BASE_URL}/motorcycle/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         setBikes(bikes.filter((bike) => bike.motorcycle_id !== id));

@@ -5,6 +5,7 @@ import '../style/Result.css';
 import Star from '../images/star.png';
 import BikeDetailCard from "../components/BikeDetailCard";
 import { useRecommend } from '../context/RecommendContext';
+import API_BASE_URL from "../config";
 
 export default function Result() {
   const { selectedType, priority, criteria } = useRecommend();
@@ -24,7 +25,7 @@ export default function Result() {
     const userData = { selectedType, priority, criteria };
     console.log('ส่งข้อมูลไป backend:', userData);
 
-    fetch('http://localhost:5000/api/recommend', {
+    fetch(`${API_BASE_URL}/recommend`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -60,7 +61,7 @@ export default function Result() {
       }))
     };
 
-    fetch('http://localhost:5000/api/recommend-history', {
+    fetch(`${API_BASE_URL}/recommend-history`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

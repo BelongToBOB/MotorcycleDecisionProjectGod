@@ -6,6 +6,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import ImageUploader from '../components/ImageUploader'
 import '../style/BikeListEdit.css'
+import API_BASE_URL from "../config";
 
 export default function BikeListEdit() {
   const { id } = useParams();
@@ -27,7 +28,7 @@ export default function BikeListEdit() {
 
   useEffect(() => {
     // โหลดข้อมูลเดิมของมอไซค์
-    axios.get(`http://localhost:5000/api/motorcycle/${id}`, {
+    axios.get(`${API_BASE_URL}/motorcycle/${id}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     }).then(res => {
       const d = res.data;
@@ -47,7 +48,7 @@ export default function BikeListEdit() {
     }).catch(() => toast.error("โหลดข้อมูลไม่สำเร็จ"));
 
     // โหลดประเภท
-    axios.get("http://localhost:5000/api/mototype", {
+    axios.get(`${API_BASE_URL}/api/mototype`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     }).then(res => setTypes(res.data));
   }, [id]);
@@ -60,7 +61,7 @@ export default function BikeListEdit() {
     if (!form.moto_name || !form.moto_type_id) return toast.error("กรอกข้อมูลให้ครบ");
 
     try {
-      await axios.put(`http://localhost:5000/api/motorcycle/${id}`, form, {
+      await axios.put(`${API_BASE_URL}/motorcycle/${id}`, form, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       });
       toast.success("บันทึกข้อมูลสำเร็จ");

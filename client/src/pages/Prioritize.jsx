@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import "../style/Prioritize.css";
 import { useRecommend } from "../context/RecommendContext";
+import API_BASE_URL from "../config";
 
 const criteriaInit = [
   { id: "price", label: "ราคา" },

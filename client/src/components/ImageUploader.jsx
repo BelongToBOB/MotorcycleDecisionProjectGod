@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import "../style/ImageUploader.css";
+import API_BASE_URL from "../config";
 
 export default function ImageUploader({ value, onUpload }) {
   const [image, setImage] = useState(null);
@@ -22,7 +23,7 @@ export default function ImageUploader({ value, onUpload }) {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/upload/image",
+        `${API_BASE_URL}/upload/image`,
         formData,
         {
           headers: {

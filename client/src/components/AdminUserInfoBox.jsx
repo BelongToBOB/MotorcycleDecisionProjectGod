@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../style/AdminUserInfoBox.css";
+import API_BASE_URL from "../config";
 
 export default function AdminUserInfoBox({ user, onDelete }) {
   return (

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "../style/BikeTypeAdd.css";
+import API_BASE_URL from "../config";
 
 export default function BikeTypeAdd() {
   const [moto_type_name, setName] = useState("");
@@ -17,7 +18,7 @@ export default function BikeTypeAdd() {
     const formData = new FormData();
     formData.append("image", img);
     try {
-      const res = await axios.post("http://localhost:5000/api/upload/image", formData);
+      const res = await axios.post(`${API_BASE_URL}/upload/image`, formData);
       setPicture(res.data.url);
       toast.success("อัปโหลดรูปสำเร็จ");
     } catch {
@@ -30,7 +31,7 @@ export default function BikeTypeAdd() {
     if (!moto_type_name.trim()) return toast.error("กรุณาระบุชื่อประเภท");
     try {
       await axios.post(
-        "http://localhost:5000/api/mototype",
+        `${API_BASE_URL}/mototype`,
         { moto_type_name, picture },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );

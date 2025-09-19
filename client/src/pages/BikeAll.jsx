@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import BikeCard from "../components/BikeCard";
 import BikeDetailCard from "../components/BikeDetailCard";
 import "../style/BikeAll.css";
+import API_BASE_URL from "../config";
 
 export default function BikeAll() {
   const [bikes, setBikes] = useState([]);
@@ -15,11 +16,11 @@ export default function BikeAll() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/motorcycle")
+      .get(`${API_BASE_URL}/motorcycle`)
       .then((res) => setBikes(res.data))
       .catch(() => setBikes([]));
     axios
-      .get("http://localhost:5000/api/mototype")
+      .get(`${API_BASE_URL}/mototype`)
       .then((res) => setTypes(res.data))
       .catch(() => setTypes([]));
   }, []);

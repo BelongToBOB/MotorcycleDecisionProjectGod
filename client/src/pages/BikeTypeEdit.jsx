@@ -9,13 +9,14 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import BikeTypeBox from '../components/BikeTypeBox';
 import Swal from 'sweetalert2';
+import API_BASE_URL from "../config";
 
 export default function BikeTypeEdit() {
   const [types, setTypes] = useState([]);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/mototype", {
+    axios.get(`${API_BASE_URL}/mototype`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     })
     .then(res => {
@@ -38,7 +39,7 @@ export default function BikeTypeEdit() {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:5000/api/mototype/${moto_type_id}`, {
+        await axios.delete(`${API_BASE_URL}/mototype/${moto_type_id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
         });
         setTypes(types.filter(type => type.moto_type_id !== moto_type_id));

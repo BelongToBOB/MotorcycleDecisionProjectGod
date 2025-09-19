@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "../style/AdminInfoBox.css";
+import API_BASE_URL from "../config";
 
 export default function AdminInfoBox({ admin, onDelete }) {
   const [showDetail, setShowDetail] = useState(false);
@@ -21,7 +22,7 @@ export default function AdminInfoBox({ admin, onDelete }) {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:5000/api/admin/${admin.user_id}`, {
+        await axios.delete(`${API_BASE_URL}/admin/${admin.user_id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         Swal.fire("ลบสำเร็จ!", "ข้อมูลแอดมินถูกลบแล้ว", "success");

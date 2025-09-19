@@ -6,6 +6,7 @@ import "../style/AdminPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 export default function AdminPage() {
   const [admins, setAdmins] = useState([]);
@@ -13,7 +14,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/admin", {
+      .get(`${API_BASE_URL}/api/admin`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => setAdmins(res.data))

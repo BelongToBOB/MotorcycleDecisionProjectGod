@@ -4,6 +4,7 @@ import "../style/Contact.css";
 import cb from "../images/cb1000_3-removebg-preview.png";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import API_BASE_URL from "../config";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -23,7 +24,7 @@ export default function Contact() {
     const token = localStorage.getItem("token");
     if (!token) return toast.error("กรุณาเข้าสู่ระบบก่อนส่งข้อความ");
     try {
-      const res = await fetch("http://localhost:5000/api/message", {
+      const res = await fetch(`${API_BASE_URL}/api/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

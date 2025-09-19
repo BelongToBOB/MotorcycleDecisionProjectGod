@@ -16,6 +16,7 @@ import smash from "../images/SuzukiBike/Smash-Fi.png"
 import mt09 from "../images/YamahaBike/Mt09.png"
 import z900 from "../images/KawasakiBike/z900.jpg"
 import hornet750 from "../images/HondaBike/cb750hornet.png"
+import API_BASE_URL from "../config";
 
 export default function Magazine() {
   const [filter, setFilter] = useState("all");

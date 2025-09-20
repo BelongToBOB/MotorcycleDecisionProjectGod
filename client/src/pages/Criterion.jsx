@@ -51,53 +51,73 @@ export default function Criterion() {
   const navigate = useNavigate();
 
   const [options, setOptions] = useState({
-    price: [], cc: [], fuel: [], maintenance: [], brand: []
+    price: [],
+    cc: [],
+    fuel: [],
+    maintenance: [],
+    brand: [],
   });
   const [available, setAvailable] = useState({
-    price: [], cc: [], fuel: [], maintenance: [], brand: []
+    price: [],
+    cc: [],
+    fuel: [],
+    maintenance: [],
+    brand: [],
   });
   const [selected, setSelected] = useState({
-    price: "", cc: "", fuel: "", maintenance: "", brand: ""
+    price: "",
+    cc: "",
+    fuel: "",
+    maintenance: "",
+    brand: "",
   });
 
   const fetchOptions = async (criteria = {}) => {
     try {
       const qs = new URLSearchParams({ typeId: selectedType, ...criteria });
       const res = await fetch(
-        `${API_BASE_URL}/criteria?${qs.toString()}`,
-        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        `${API_BASE_URL}/criteria/options?${qs.toString()}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
       );
 
       if (!res.ok) {
         console.error(`API error ${res.status}`);
         setOptions({ price: [], cc: [], fuel: [], maintenance: [], brand: [] });
-        setAvailable({ price: [], cc: [], fuel: [], maintenance: [], brand: [] });
+        setAvailable({
+          price: [],
+          cc: [],
+          fuel: [],
+          maintenance: [],
+          brand: [],
+        });
         return;
       }
 
       const data = await res.json();
       const {
-        price:       priceData       = [],
-        cc:          ccData          = [],
-        fuel:        fuelData        = [],
-        maintenance: maintData       = [],
-        brand:       brandData       = [],
+        price: priceData = [],
+        cc: ccData = [],
+        fuel: fuelData = [],
+        maintenance: maintData = [],
+        brand: brandData = [],
       } = data || {};
 
       setOptions({
-        price:       PRICE_ORDER.filter(l => priceData.includes(l)),
-        cc:          CC_ORDER.filter(l    => ccData.includes(l)),
-        fuel:        FUEL_ORDER.filter(l  => fuelData.includes(l)),
-        maintenance: MAINT_ORDER.filter(l => maintData.includes(l)),
-        brand:       BRAND_ORDER
+        price: PRICE_ORDER.filter((l) => priceData.includes(l)),
+        cc: CC_ORDER.filter((l) => ccData.includes(l)),
+        fuel: FUEL_ORDER.filter((l) => fuelData.includes(l)),
+        maintenance: MAINT_ORDER.filter((l) => maintData.includes(l)),
+        brand: BRAND_ORDER,
       });
 
       setAvailable({
-        price:       priceData,
-        cc:          ccData,
-        fuel:        fuelData,
+        price: priceData,
+        cc: ccData,
+        fuel: fuelData,
         maintenance: maintData,
-        brand:       brandData,
+        brand: brandData,
       });
     } catch (err) {
       console.error("โหลด options ไม่สำเร็จ", err);
@@ -110,32 +130,30 @@ export default function Criterion() {
   }, [selectedType]);
 
   const handleSelect = (key, value) => {
-  const next = { ...selected };
+    const next = { ...selected };
 
-  if (selected[key] === value) {
-    next[key] = "";
-  } else {
-    if (key === "brand") {
-      // reset ทุกอย่างยกเว้น brand
-      next.price = "";
-      next.cc = "";
-      next.fuel = "";
-      next.maintenance = "";
+    if (selected[key] === value) {
+      next[key] = "";
+    } else {
+      if (key === "brand") {
+        // reset ทุกอย่างยกเว้น brand
+        next.price = "";
+        next.cc = "";
+        next.fuel = "";
+        next.maintenance = "";
+      }
+      next[key] = value;
     }
-    next[key] = value;
-  }
 
-  setSelected(next);
-  fetchOptions(next);
-};
-
-
+    setSelected(next);
+    fetchOptions(next);
+  };
 
   const isDisabled = (key, value) => {
-  if (key === "brand" && value === "เลือกทุกแบรนด์") return false;
-  const arr = available[key] || [];
-  return !arr.includes(value);
-};
+    if (key === "brand" && value === "เลือกทุกแบรนด์") return false;
+    const arr = available[key] || [];
+    return !arr.includes(value);
+  };
 
   const handleNext = () => {
     setCriteria(selected);
@@ -150,101 +168,114 @@ export default function Criterion() {
           <div className="content-box-criterion">
             <h2 className="choice-text">ตัวเลือก</h2>
             <div className="data-choice">
-
               {/* ยี่ห้อ */}
               <div className="brand">
                 <h3>ยี่ห้อ</h3>
-                {options.brand.length
-                  ? options.brand.map((r, i) => (
-                      <div key={i} className="button-con">
-                        <button
-                          className={`check-btn ${selected.brand === r ? "active" : ""}`}
-                          onClick={() => handleSelect("brand", r)}
-                          type="button"
-                        />
-                        <p>{r}</p>
-                      </div>
-                    ))
-                  : <p className="note-empty">ไม่มีตัวเลือกในหมวดนี้</p>
-                }
+                {options.brand.length ? (
+                  options.brand.map((r, i) => (
+                    <div key={i} className="button-con">
+                      <button
+                        className={`check-btn ${
+                          selected.brand === r ? "active" : ""
+                        }`}
+                        onClick={() => handleSelect("brand", r)}
+                        type="button"
+                      />
+                      <p>{r}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="note-empty">ไม่มีตัวเลือกในหมวดนี้</p>
+                )}
               </div>
 
               {/* งบประมาณ */}
               <div className="price">
                 <h3>งบประมาณ</h3>
-                {options.price.length
-                  ? options.price.map((r, i) => (
-                      <div key={i} className="button-con">
-                        <button
-                          disabled={isDisabled("price", r)}
-                          className={`check-btn ${selected.price === r ? "active" : ""}`}
-                          onClick={() => handleSelect("price", r)}
-                          type="button"
-                        />
-                        <p>{r}</p>
-                      </div>
-                    ))
-                  : <p className="note-empty">ไม่มีตัวเลือกในหมวดนี้</p>
-                }
+                {options.price.length ? (
+                  options.price.map((r, i) => (
+                    <div key={i} className="button-con">
+                      <button
+                        disabled={isDisabled("price", r)}
+                        className={`check-btn ${
+                          selected.price === r ? "active" : ""
+                        }`}
+                        onClick={() => handleSelect("price", r)}
+                        type="button"
+                      />
+                      <p>{r}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="note-empty">ไม่มีตัวเลือกในหมวดนี้</p>
+                )}
               </div>
 
               {/* CC */}
               <div className="cc">
                 <h3>CC</h3>
-                {options.cc.length
-                  ? options.cc.map((r, i) => (
-                      <div key={i} className="button-con">
-                        <button
-                          disabled={isDisabled("cc", r)}
-                          className={`check-btn ${selected.cc === r ? "active" : ""}`}
-                          onClick={() => handleSelect("cc", r)}
-                          type="button"
-                        />
-                        <p>{r}</p>
-                      </div>
-                    ))
-                  : <p className="note-empty">ไม่มีตัวเลือกในหมวดนี้</p>
-                }
+                {options.cc.length ? (
+                  options.cc.map((r, i) => (
+                    <div key={i} className="button-con">
+                      <button
+                        disabled={isDisabled("cc", r)}
+                        className={`check-btn ${
+                          selected.cc === r ? "active" : ""
+                        }`}
+                        onClick={() => handleSelect("cc", r)}
+                        type="button"
+                      />
+                      <p>{r}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="note-empty">ไม่มีตัวเลือกในหมวดนี้</p>
+                )}
               </div>
 
               {/* อัตราสิ้นเปลือง */}
               <div className="fuel">
                 <h3>อัตราสิ้นเปลือง</h3>
-                {options.fuel.length
-                  ? options.fuel.map((r, i) => (
-                      <div key={i} className="button-con">
-                        <button
-                          disabled={isDisabled("fuel", r)}
-                          className={`check-btn ${selected.fuel === r ? "active" : ""}`}
-                          onClick={() => handleSelect("fuel", r)}
-                          type="button"
-                        />
-                        <p>{r}</p>
-                      </div>
-                    ))
-                  : <p className="note-empty">ไม่มีตัวเลือกในหมวดนี้</p>
-                }
+                {options.fuel.length ? (
+                  options.fuel.map((r, i) => (
+                    <div key={i} className="button-con">
+                      <button
+                        disabled={isDisabled("fuel", r)}
+                        className={`check-btn ${
+                          selected.fuel === r ? "active" : ""
+                        }`}
+                        onClick={() => handleSelect("fuel", r)}
+                        type="button"
+                      />
+                      <p>{r}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="note-empty">ไม่มีตัวเลือกในหมวดนี้</p>
+                )}
               </div>
 
               {/* ค่าบำรุงรักษา */}
               <div className="maintenance">
                 <h3>ค่าบำรุงรักษาในปีแรก</h3>
-                {options.maintenance.length
-                  ? options.maintenance.map((r, i) => (
-                      <div key={i} className="button-con">
-                        <button
-                          disabled={isDisabled("maintenance", r)}
-                          className={`check-btn ${selected.maintenance === r ? "active" : ""}`}
-                          onClick={() => handleSelect("maintenance", r)}
-                          type="button"
-                        />
-                        <p>{r}</p>
-                      </div>
-                    ))
-                  : <p className="note-empty">ไม่มีตัวเลือกในหมวดนี้</p>
-                }
+                {options.maintenance.length ? (
+                  options.maintenance.map((r, i) => (
+                    <div key={i} className="button-con">
+                      <button
+                        disabled={isDisabled("maintenance", r)}
+                        className={`check-btn ${
+                          selected.maintenance === r ? "active" : ""
+                        }`}
+                        onClick={() => handleSelect("maintenance", r)}
+                        type="button"
+                      />
+                      <p>{r}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="note-empty">ไม่มีตัวเลือกในหมวดนี้</p>
+                )}
               </div>
-
             </div>
             <div className="button-space-prioritize">
               <Link to="/Prioritize">
@@ -253,7 +284,7 @@ export default function Criterion() {
               <button
                 className="next-btn-prioritize"
                 onClick={handleNext}
-                disabled={Object.values(selected).some(v => !v)}
+                disabled={Object.values(selected).some((v) => !v)}
               >
                 ถัดไป
               </button>

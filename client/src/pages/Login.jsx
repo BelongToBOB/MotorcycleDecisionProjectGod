@@ -14,7 +14,6 @@ export default function Login() {
     password: "",
   });
 
-  // ✅ ใช้ Zustand store (persist)
   const { setUser, setToken } = useUserStore();
 
   const handleChange = (e) => {
@@ -34,7 +33,6 @@ export default function Login() {
 
       const { token, payload } = res.data;
 
-      // ✅ เก็บทั้งใน Zustand + localStorage ผ่าน persist
       setToken(token);
       setUser(payload);
 
@@ -67,7 +65,8 @@ export default function Login() {
                 value={form.emailOrUsername}
                 onChange={handleChange}
               />
-              <br /><br />
+              <br />
+              <br />
               <input
                 type="password"
                 placeholder="Password"
@@ -77,7 +76,11 @@ export default function Login() {
                 onChange={handleChange}
               />
               <br />
-              <button className="enter-button" onClick={handleLogin}>
+              <button
+                type="button"
+                className="enter-button"
+                onClick={handleLogin}
+              >
                 ตกลง
               </button>
               <div className="forgotpass">

@@ -14,7 +14,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE_URL}/api/admin`, {
+      .get(`${API_BASE_URL}/admin`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => setAdmins(res.data))

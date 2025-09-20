@@ -45,16 +45,17 @@ export default function Statistic() {
       try {
         const token = localStorage.getItem("token");
         const [statRes, typeRes, historyRes] = await Promise.all([
-          fetch(`${API_BASE_URL}/history/statistic`, {
+          fetch(`${API_BASE_URL}/statistic`, {
             headers: { Authorization: `Bearer ${token}` },
           }).then((r) => r.json()),
           fetch(`${API_BASE_URL}/mototype`, {
             headers: { Authorization: `Bearer ${token}` },
           }).then((r) => r.json()),
-          fetch(`${API_BASE_URL}/history`, {
+          fetch(`${API_BASE_URL}/recommend-history`, {
             headers: { Authorization: `Bearer ${token}` },
           }).then((r) => r.json()),
         ]);
+
         setStat(statRes);
         setTypes(typeRes);
         setHistory(historyRes);

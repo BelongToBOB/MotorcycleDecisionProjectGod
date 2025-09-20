@@ -34,7 +34,7 @@ export default function Register() {
     }
 
     try {
-      await axios.post(`${API_BASE_URL}/api/register`, {
+      await axios.post(`${API_BASE_URL}/register`, {
         username: form.username, 
         email: form.email,
         password: form.password,

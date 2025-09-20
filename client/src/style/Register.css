@@ -160,3 +160,53 @@
     margin-top: 0.3rem;
     cursor: pointer;
 }
+
+/* สำหรับ Tablet และ Mobile */
+@media (max-width: 768px) {
+  .register_box {
+    width: 90%;
+    padding: 2rem;
+  }
+
+  .register-form-input {
+    grid-template-columns: 1fr; /* จาก 2 คอลัมน์ เหลือ 1 */
+    gap: 0.5rem;
+  }
+
+  .registerinput,
+  .addressInput {
+    width: 100%; /* กว้างเต็มหน้าจอ */
+  }
+
+  .enter-button {
+    width: 100%;
+    height: 2.8rem;
+    font-size: 16px;
+  }
+
+  .register_box h1 {
+    font-size: 28px;
+  }
+}
+
+/* สำหรับจอเล็กมาก ๆ เช่นมือถือ <480px */
+@media (max-width: 480px) {
+  .register_box {
+    padding: 1.5rem;
+  }
+
+  .register_box h1 {
+    font-size: 22px;
+  }
+
+  .registerinput,
+  .addressInput {
+    font-size: 14px;
+    height: 2.2rem;
+  }
+
+  .enter-button {
+    font-size: 14px;
+    height: 2.5rem;
+  }
+}

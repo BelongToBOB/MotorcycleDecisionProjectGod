@@ -1,17 +1,19 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from 'zustand';
 
-export const useUserStore = create(
-  persist(
-    (set) => ({
-      user: null,
-      token: null,
-      setUser: (user) => set({ user }),
-      setToken: (token) => set({ token }),
-      logout: () => set({ user: null, token: null }),
-    }),
-    {
-      name: "user-storage", 
-    }
-  )
-);
+export const useUserStore = create((set) => ({
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  token: localStorage.getItem("token") || null,
+  setUser: (user) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    set({ user });
+  },
+  setToken: (token) => {
+    localStorage.setItem("token", token);
+    set({ token });
+  },
+  logout: () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    set({ user: null, token: null });
+  },
+}));

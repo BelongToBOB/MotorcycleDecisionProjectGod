@@ -12,7 +12,7 @@ export default function AdminMessage() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch(`${API_BASE_URL}/api/message`, {
+    fetch(`${API_BASE_URL}/message`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())

@@ -26,7 +26,7 @@ export default function Login() {
     }
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/login`, {
+      const res = await axios.post(`${API_BASE_URL}/auth/login`, {
         emailOrUsername: form.emailOrUsername,
         password: form.password,
       });

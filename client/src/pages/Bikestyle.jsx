@@ -33,7 +33,7 @@ export default function BikeStyle() {
       return;
     }
     axios
-      .get(`${API_BASE_URL}/api/mototype`, {
+      .get(`${API_BASE_URL}/mototype`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setTypes(res.data))

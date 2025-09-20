@@ -64,7 +64,7 @@ export default function Criterion() {
     try {
       const qs = new URLSearchParams({ typeId: selectedType, ...criteria });
       const res = await fetch(
-        `${API_BASE_URL}/criteria-options-dynamic?${qs.toString()}`,
+        `${API_BASE_URL}/criteria?${qs.toString()}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
 

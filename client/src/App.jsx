@@ -12,22 +12,27 @@ function App() {
   const { setUser, setToken, logout } = useUserStore();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setToken(token);
-      axios
-        .get(`${API_BASE_URL}/current-user`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
-          const userData = res.data.payload ? res.data.payload : res.data;
-          setUser(userData);
-        })
-        .catch(() => {
-          logout();
-        });
+  const token = localStorage.getItem("token");
+  const user = localStorage.getItem("user");
+
+  if (token) {
+    setToken(token);
+
+    if (user) {
+      setUser(JSON.parse(user));   
+    } else {
+      // fallback: call API เพื่อเอา user
+      axios.get(`${API_BASE_URL}/current-user`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(res => {
+        setUser(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data)); 
+      })
+      .catch(() => logout());
     }
-  }, [setUser, setToken, logout]);
+  }
+}, [setUser, setToken, logout]);
 
   return (
     <RecommendProvider>

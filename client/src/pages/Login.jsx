@@ -21,33 +21,23 @@ export default function Login() {
   };
 
   const handleLogin = async () => {
-    if (!form.emailOrUsername || !form.password) {
-      return toast.error("กรุณากรอกข้อมูลให้ครบ");
-    }
+  try {
+    const res = await axios.post(`${API_BASE_URL}/auth/login`, form);
+    const { token, payload } = res.data;
 
-    try {
-      const res = await axios.post(`${API_BASE_URL}/auth/login`, {
-        emailOrUsername: form.emailOrUsername,
-        password: form.password,
-      });
+    // เก็บลง localStorage
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(payload));
 
-      const { token, payload } = res.data;
+    setToken(token);
+    setUser(payload);
 
-      setToken(token);
-      setUser(payload);
-
-      toast.success("เข้าสู่ระบบสำเร็จ");
-
-      if (payload.role === "admin") {
-        navigate("/AdminBo");
-      } else {
-        navigate("/");
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error(err.response?.data?.message || "เข้าสู่ระบบไม่สำเร็จ");
-    }
-  };
+    toast.success("เข้าสู่ระบบสำเร็จ");
+    navigate(payload.role === "admin" ? "/AdminBo" : "/");
+  } catch (err) {
+    toast.error(err.response?.data?.message || "เข้าสู่ระบบไม่สำเร็จ");
+  }
+};
 
   return (
     <>

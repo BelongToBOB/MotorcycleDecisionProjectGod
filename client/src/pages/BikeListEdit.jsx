@@ -115,11 +115,11 @@ export default function BikeListEdit() {
                     <input name="maintenance_cost" className='bike-manter-input' value={form.maintenance_cost} onChange={handleChange} />
                   </div>
                   <div className='bike-kml'>
-                    <h3>อัตราสิ้นเปลือง</h3>
+                    <h3>อัตราสิ้นเปลือง (กม./ลิตร)</h3>
                     <input name="consumption_rate" className='bike-kml-input' value={form.consumption_rate} onChange={handleChange} />
                   </div>
                   <div className='bike-weight'>
-                    <h3>น้ำหนัก</h3>
+                    <h3>น้ำหนัก (กิโลกรัม)</h3>
                     <input name="moto_weight" className='bike-weight-input' value={form.moto_weight} onChange={handleChange} />
                   </div>
                   <div className='bike-cc'>
@@ -131,7 +131,7 @@ export default function BikeListEdit() {
                     <input name="fuel_size" className='bike-fuel-size-input' value={form.fuel_size} onChange={handleChange} />
                   </div>
                   <div className='bike-price'>
-                    <h3>ราคา</h3>
+                    <h3>ราคา (บาท)</h3>
                     <input name="moto_price" className='bike-price-input' value={form.moto_price} onChange={handleChange} />
                   </div>
                   <div className='bike-moreInfo'>

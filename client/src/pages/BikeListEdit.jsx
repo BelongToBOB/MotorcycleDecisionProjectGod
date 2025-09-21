@@ -48,7 +48,7 @@ export default function BikeListEdit() {
     }).catch(() => toast.error("โหลดข้อมูลไม่สำเร็จ"));
 
     // โหลดประเภท
-    axios.get(`${API_BASE_URL}/api/mototype`, {
+    axios.get(`${API_BASE_URL}/mototype`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     }).then(res => setTypes(res.data));
   }, [id]);

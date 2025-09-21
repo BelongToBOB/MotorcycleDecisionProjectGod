@@ -120,7 +120,7 @@ export default function Result() {
                     className="moreInfo-btn"
                     onClick={() => setSelectedBike(best)}
                   >
-                    เพิ่มเติม
+                    ดูรายะเอียดเพิ่มเติม
                   </button>                 
                 </div>
               </div>

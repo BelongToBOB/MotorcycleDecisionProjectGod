@@ -3,7 +3,9 @@ const prisma = require('../config/prisma');
 // สำหรับ User ส่งข้อความ
 exports.create = async (req, res) => {
   try {
-    const user_id = req.user.user_id; // 🔁 เปลี่ยน id → user_id
+    console.log("📩 message body:", req.body); 
+    console.log("👤 user:", req.user);         
+    const user_id = req.user.user_id; 
     const { name, email, tel, content } = req.body;
     if (!name || !email || !content) return res.status(400).json({ message: 'Missing required fields' });
 

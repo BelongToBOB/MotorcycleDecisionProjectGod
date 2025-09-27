@@ -24,7 +24,7 @@ export default function Contact() {
     const token = localStorage.getItem("token");
     if (!token) return toast.error("กรุณาเข้าสู่ระบบก่อนส่งข้อความ");
     try {
-      const res = await fetch(`${API_BASE_URL}/api/message`, {
+      const res = await fetch(`${API_BASE_URL}/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

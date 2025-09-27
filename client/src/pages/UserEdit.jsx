@@ -8,6 +8,19 @@ import { toast } from "react-toastify";
 import ImageUploader from "../components/ImageUploader";
 import API_BASE_URL from "../config";
 
+const provinces = [
+  "กรุงเทพมหานคร","กระบี่","กาญจนบุรี","กาฬสินธุ์","กำแพงเพชร","ขอนแก่น",
+  "จันทบุรี","ฉะเชิงเทรา","ชลบุรี","ชัยนาท","ชัยภูมิ","ชุมพร","เชียงราย","เชียงใหม่",
+  "ตรัง","ตราด","ตาก","นครนายก","นครปฐม","นครพนม","นครราชสีมา","นครศรีธรรมราช",
+  "นครสวรรค์","นนทบุรี","นราธิวาส","น่าน","บึงกาฬ","บุรีรัมย์","ปทุมธานี","ประจวบคีรีขันธ์",
+  "ปราจีนบุรี","ปัตตานี","พระนครศรีอยุธยา","พังงา","พัทลุง","พิจิตร","พิษณุโลก","เพชรบุรี",
+  "เพชรบูรณ์","แพร่","ภูเก็ต","มหาสารคาม","มุกดาหาร","แม่ฮ่องสอน","ยโสธร","ยะลา","ร้อยเอ็ด",
+  "ระนอง","ระยอง","ราชบุรี","ลพบุรี","ลำปาง","ลำพูน","ศรีสะเกษ","สกลนคร","สงขลา","สตูล",
+  "สมุทรปราการ","สมุทรสงคราม","สมุทรสาคร","สระแก้ว","สระบุรี","สิงห์บุรี","สุโขทัย","สุพรรณบุรี",
+  "สุราษฎร์ธานี","สุรินทร์","หนองคาย","หนองบัวลำภู","อ่างทอง","อำนาจเจริญ","อุดรธานี","อุตรดิตถ์",
+  "อุทัยธานี","อุบลราชธานี"
+];
+
 export default function UserEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -20,7 +33,7 @@ export default function UserEdit() {
     birthDate: "",
     phone: "",
     occupation: "",
-    address: "",
+    province: "",
     password: "",
     confirmPassword: "",
     picture: "",
@@ -42,7 +55,7 @@ export default function UserEdit() {
           birthDate: res.data.birthDate ? res.data.birthDate.split("T")[0] : "",
           phone: res.data.phone || "",
           occupation: res.data.occupation || "",
-          address: res.data.address || "",
+          province: res.data.province || res.data.address || "", // ✅ รองรับทั้ง province / address
           password: "",
           confirmPassword: "",
           picture: res.data.picture || "",
@@ -143,8 +156,13 @@ export default function UserEdit() {
                   <input type="text" name="occupation" value={form.occupation} onChange={handleChange} />
                 </label>
                 <label>
-                  ที่อยู่
-                  <textarea name="address" value={form.address} onChange={handleChange} />
+                  จังหวัดที่อาศัย
+                  <select name="province" value={form.province} onChange={handleChange}>
+                    <option value="">เลือกจังหวัด</option>
+                    {provinces.map((prov, i) => (
+                      <option key={i} value={prov}>{prov}</option>
+                    ))}
+                  </select>
                 </label>
                 <label>
                   รหัสผ่านใหม่

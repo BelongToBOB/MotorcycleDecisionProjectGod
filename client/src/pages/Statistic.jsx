@@ -55,7 +55,7 @@ export default function Statistic() {
             headers: { Authorization: `Bearer ${token}` },
           }).then((r) => r.json()),
         ]);
-
+        
         setStat(statRes);
         setTypes(typeRes);
         setHistory(historyRes);
@@ -74,7 +74,6 @@ export default function Statistic() {
   const typeMap = {};
   types.forEach((t) => (typeMap[t.moto_type_id] = t.moto_type_name));
 
-  // ✅ Filter เชิงลึก
   const filteredHistory = history.filter((h) => {
     const result = Array.isArray(h.result) ? h.result[0] : h.result;
     const createdAt = dayjs(h.createdAt);
@@ -99,7 +98,6 @@ export default function Statistic() {
     );
   });
 
-  // ✅ Export CSV เฉพาะ filteredHistory
   const exportDeepCSV = () => {
     const rows = filteredHistory.map((h) => {
       const result = Array.isArray(h.result) ? h.result[0] : h.result;
@@ -262,21 +260,18 @@ export default function Statistic() {
             <h3>รุ่นที่ถูกเลือกมากที่สุด</h3>
             <p>
               <b>
-                {stat.topModels[0]?.brand
-                  ? `${stat.topModels[0].brand} ${
-                      stat.topModels[0]?.model || stat.topModels[0]?.moto_name
+                {stat.topModels && stat.topModels.length > 0
+                  ? `${stat.topModels[0]?.brand || ""} ${
+                      stat.topModels[0]?.model || ""
                     }`
-                  : stat.topModels[0]?.model || stat.topModels[0]?.moto_name}
+                  : "-"}
               </b>
             </p>
             <span>{stat.topModels[0]?.count} ครั้ง</span>
 
             {stat.topModels.slice(1, 3).map((m, i) => (
               <div key={i} className="sub-rank">
-                {m.brand
-                  ? `${m.brand} ${m.model || m.moto_name}`
-                  : m.model || m.moto_name}{" "}
-                ({m.count} ครั้ง)
+                {`${m.brand || ""} ${m.model || ""}`} ({m.count} ครั้ง)
               </div>
             ))}
           </div>

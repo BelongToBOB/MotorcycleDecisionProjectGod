@@ -143,3 +143,20 @@ a {
       padding: 4px 8px;
   }
 }
+
+.logout-button {
+  background-color: #e74c3c; 
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.25s ease-in-out;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.logout-button:hover {
+  background-color: #c0392b; 
+}
+

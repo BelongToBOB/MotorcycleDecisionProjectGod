@@ -53,7 +53,6 @@ const formatHistory = (h) => {
   };
 };
 
-// 📊 สถิติรวม
 exports.getStatistic = async (req, res) => {
   try {
     const histories = await prisma.recommendhistory.findMany({
@@ -61,16 +60,15 @@ exports.getStatistic = async (req, res) => {
       orderBy: { createdAt: "desc" },
     });
 
-    // โหลดข้อมูลมอเตอร์ไซค์ทั้งหมดมาเก็บ map
     const motorcycles = await prisma.motorcycle.findMany({
       select: { moto_name: true, moto_brand: true },
     });
+
     const motoMap = {};
-    motorcycles.forEach(m => {
+    motorcycles.forEach((m) => {
       motoMap[m.moto_name] = m.moto_brand;
     });
 
-    // --- Count ---
     const brandCount = {};
     const typeCount = {};
     const priceCount = {};
@@ -79,51 +77,40 @@ exports.getStatistic = async (req, res) => {
     histories.forEach((h) => {
       let criteria = {};
       let result = [];
-      try {
-        criteria = JSON.parse(h.criteria);
-      } catch {}
-      try {
-        result = JSON.parse(h.result);
-      } catch {}
+      try { criteria = JSON.parse(h.criteria); } catch {}
+      try { result = JSON.parse(h.result); } catch {}
 
-      // ✅ นับ brand จาก criteria หรือจาก DB
       if (criteria.brand) {
         brandCount[criteria.brand] = (brandCount[criteria.brand] || 0) + 1;
       }
-
-      // ✅ นับ type
       if (h.selectedType) {
         typeCount[h.selectedType] = (typeCount[h.selectedType] || 0) + 1;
       }
-
-      // ✅ นับ price
       if (criteria.price) {
         priceCount[criteria.price] = (priceCount[criteria.price] || 0) + 1;
       }
 
-      // ✅ นับ model + brand
       if (Array.isArray(result) && result.length > 0) {
         const best = result[0];
         const modelName = best?.moto_name || best?.model;
-        const brandName = motoMap[modelName] || best?.moto_brand || criteria.brand;
+        const brandName =
+          motoMap[modelName] || best?.moto_brand || criteria.brand || "ไม่ทราบ";
 
         if (modelName) {
-          const key = `${brandName || "ไม่ทราบ"}||${modelName}`;
+          const key = `${brandName}||${modelName}`;
           modelCount[key] = (modelCount[key] || 0) + 1;
         }
       }
     });
 
-    // --- Top 10 Models ---
     const topModels = Object.entries(modelCount)
       .map(([key, count]) => {
-        const [brand, model] = key.split("||");
+        let [brand, model] = key.split("||");
         return { brand, model, count };
       })
       .sort((a, b) => b.count - a.count)
       .slice(0, 10);
 
-    // --- ล่าสุด 10 ---
     const latest = histories.slice(0, 10).map(formatHistory);
 
     res.json({
@@ -138,6 +125,7 @@ exports.getStatistic = async (req, res) => {
     res.status(500).json({ message: "Server Error", err });
   }
 };
+
 
 
 /**

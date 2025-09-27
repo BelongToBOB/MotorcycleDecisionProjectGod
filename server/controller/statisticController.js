@@ -1,93 +1,91 @@
 const prisma = require("../config/prisma");
 
+// ฟังก์ชันช่วย format ประวัติ
+function formatHistory(h) {
+  let criteria = {};
+  let result = [];
+  try { criteria = JSON.parse(h.criteria); } catch {}
+  try { result = JSON.parse(h.result); } catch {}
+
+  return {
+    history_id: h.history_id,
+    user: h.user ? { username: h.user.username } : null,
+    selectedType: h.selectedType,
+    criteria,
+    result,
+    createdAt: h.createdAt,
+  };
+}
+
 exports.overview = async (req, res) => {
   try {
     const histories = await prisma.recommendhistory.findMany({
-      include: { user: true }, // ✅ ดึง user มาด้วย
+      include: { user: true },
+      orderBy: { createdAt: "desc" },
     });
 
-    const types = await prisma.mototype.findMany();
-    const typeMap = {};
-    types.forEach((t) => (typeMap[t.moto_type_id] = t.moto_type_name));
+    const motorcycles = await prisma.motorcycle.findMany({
+      select: { moto_name: true, moto_brand: true },
+    });
 
-    // ตัวนับ
-    const typeCount = {},
-      brandCount = {},
-      priceCount = {},
-      modelCount = {};
+    const motoMap = {};
+    motorcycles.forEach((m) => {
+      motoMap[m.moto_name] = m.moto_brand;
+    });
 
-    for (const h of histories) {
+    const brandCount = {};
+    const typeCount = {};
+    const priceCount = {};
+    const modelCount = {};
+
+    histories.forEach((h) => {
+      let criteria = {};
+      let result = [];
+      try { criteria = JSON.parse(h.criteria); } catch {}
+      try { result = JSON.parse(h.result); } catch {}
+
+      if (criteria.brand) {
+        brandCount[criteria.brand] = (brandCount[criteria.brand] || 0) + 1;
+      }
       if (h.selectedType) {
         typeCount[h.selectedType] = (typeCount[h.selectedType] || 0) + 1;
       }
-
-      let criteria = {};
-      try {
-        criteria = JSON.parse(h.criteria);
-      } catch {}
-
-      if (criteria.brand)
-        brandCount[criteria.brand] = (brandCount[criteria.brand] || 0) + 1;
-      if (criteria.price)
+      if (criteria.price) {
         priceCount[criteria.price] = (priceCount[criteria.price] || 0) + 1;
+      }
 
-      // ✅ result เก็บเป็น array → ดึง index 0
-      let result = [];
-      try {
-        result = JSON.parse(h.result);
-      } catch {}
       if (Array.isArray(result) && result.length > 0) {
         const best = result[0];
-        if (best?.moto_name) {
-          modelCount[best.moto_name] = (modelCount[best.moto_name] || 0) + 1;
+        const modelName = best?.moto_name || best?.model;
+        const brandName =
+          motoMap[modelName] || best?.moto_brand || criteria.brand || "ไม่ทราบ";
+
+        if (modelName) {
+          const key = `${brandName}||${modelName}`;
+          modelCount[key] = (modelCount[key] || 0) + 1;
         }
       }
-    }
+    });
 
-    // top 5 models
     const topModels = Object.entries(modelCount)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
-      .map(([model, count]) => ({ model, count }));
+      .map(([key, count]) => {
+        let [brand, model] = key.split("||");
+        return { brand, model, count };
+      })
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10);
 
-    // top 10 latest
-    const latest = histories
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      .slice(0, 10)
-      .map((h) => {
-        let criteria = {};
-        let result = [];
-        try {
-          criteria = JSON.parse(h.criteria);
-        } catch {}
-        try {
-          result = JSON.parse(h.result);
-        } catch {}
-        return {
-          history_id: h.history_id,
-          user: h.user ? { username: h.user.username } : null, // ✅ ดึง username ด้วย
-          selectedType: typeMap[h.selectedType] || h.selectedType,
-          criteria,
-          result,
-          createdAt: h.createdAt,
-        };
-      });
-
-    // แปลง type
-    const typeCountNamed = {};
-    for (const [tid, count] of Object.entries(typeCount)) {
-      typeCountNamed[typeMap[tid] || tid] = count;
-    }
+    const latest = histories.slice(0, 10).map(formatHistory);
 
     res.json({
-      topModels,
-      typeCount: typeCountNamed,
       brandCount,
+      typeCount,
       priceCount,
+      topModels,
       latest,
     });
   } catch (err) {
-    console.error("Statistic error", err);
-    res.status(500).json({ message: "Server Error" });
+    console.error("STATISTIC ERROR:", err);
+    res.status(500).json({ message: "Server Error", err });
   }
 };
